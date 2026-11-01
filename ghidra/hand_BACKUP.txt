@@ -1,0 +1,22 @@
+0x00200000 func stub_00200000 hand provisional overlay base, bad instruction data, halts; no real code
+0x002010cc func backup_MoveMenuCursor hand provisional moves cursor index clamped 0..0x14 by delta, reads pad bits, calls item handler or exits menu
+0x002011b8 func backup_DrawDebuggerScreen hand draws "BACKUP_DEBUGGER" title, menu item labels and values, dispatches jump table, prints backup header fields
+0x00200fe6 func backup_InitMenuState hand provisional: calls setup helpers, stores two values, sets counter 0x1e, chains init calls
+0x00201078 func backup_ReadPadDirection hand provisional: decodes pad bits into horizontal and vertical -1/0/1, forwards to handler
+0x0020159a func backup_RunItemAction hand provisional: calls per-item callbacks at offsets 0x10 and 0x8 from 0x14-stride table
+0x0020162c func backup_RunItemActionAlt hand provisional: like item action, uses callbacks at offsets 0x10 and 0xc
+0x002016c0 func backup_LoadItemValue hand provisional: runs item callback 0x10, fetches value into a byte global, applies item field
+0x00201734 func backup_LoadIndexedValue hand provisional: fetches byte from table by current index, stores global, applies item field
+0x002017c4 func backup_CycleItemValue hand provisional: increments per-item counter, wraps at table limit, redraws value
+0x00201880 func backup_AdjustNumberWrap hand provisional: pad left/right decrements or increments value wrapping 0..99, mirrors to globals
+0x002018fc func backup_StepNumberBy1 hand provisional: three calls, constant argument 1
+0x00201924 func backup_StepNumberBy10 hand provisional: three calls, constant argument 10
+0x0020194c func backup_StepNumberBy100 hand provisional: three calls, constant argument 100
+0x00201974 func backup_ApplyConstantParam hand provisional: three calls sharing one loaded halfword constant
+0x002019a0 func backup_FetchItemParam hand provisional: runs item callback 0x10, calls with 0xd,0 into byte global, applies item field
+0x00201a08 func backup_CallWithGlobal hand provisional: one call then second call passing a global value
+0x00201a30 func backup_ChainActionA hand provisional: three sequential argument-less calls in a tiny wrapper
+0x00201a58 func backup_ChainActionB hand provisional: three sequential argument-less calls in a tiny wrapper
+0x00201a80 func backup_ChainActionC hand provisional: three sequential argument-less calls in a tiny wrapper
+0x00201aa8 func backup_ChainActionD hand provisional: three sequential argument-less calls in a tiny wrapper
+0x00201ad0 func backup_ChainActionE hand provisional: three sequential argument-less calls in a tiny wrapper

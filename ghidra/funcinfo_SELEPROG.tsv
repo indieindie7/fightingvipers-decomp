@@ -1,0 +1,109 @@
+F 05c78000 stub_05c78000 USER_DEFINED 1
+F 05c78010 select_PickNextFreeSlot USER_DEFINED 136
+F 05c780c0 select_ToggleFlagA USER_DEFINED 14
+F 05c780d4 select_ToggleFlagB USER_DEFINED 14
+F 05c780e8 select_CountSelectableFighters USER_DEFINED 62
+F 05c78134 select_CountSelectableExtraFighters USER_DEFINED 82
+F 05c78194 select_CompareAndAdvanceIndex USER_DEFINED 18
+F 05c781ac select_DrawStatRows USER_DEFINED 322
+C 05c78194
+C 05c78194
+C 05c78194
+C 05c78194
+C 05c78194
+C 05c78194
+F 05c78324 select_LoadMenuSpriteSet17 USER_DEFINED 130
+F 05c783bc select_ReleaseMenuSpriteSet17 USER_DEFINED 118
+F 05c78444 select_DrawSprites12 USER_DEFINED 112
+F 05c78558 select_InitScreenAndLoadSprites22 USER_DEFINED 260
+F 05c78690 select_ReleaseSprites22 USER_DEFINED 138
+F 05c78730 select_CheckIndexMatch USER_DEFINED 42
+F 05c78760 select_DrawPlayerLabelRows USER_DEFINED 286
+C 05c78730
+C 05c78730
+C 05c78730
+C 05c78730
+F 05c788b0 select_DrawCursorsAndIcons16 USER_DEFINED 294
+C 05c78558
+C 05c78760
+F 05c78a00 select_ResetCursorSprites USER_DEFINED 244
+C 05c78760
+F 05c78b24 select_GetFighterGridX USER_DEFINED 162
+F 05c78be0 select_DrawFighterCursors USER_DEFINED 262
+C 05c78b24
+C 05c78b24
+F 05c78d1c select_DrawP1Cursor USER_DEFINED 104
+C 05c78b24
+F 05c78da4 select_DrawP2Cursor USER_DEFINED 108
+C 05c78b24
+F 05c78e30 select_DrawBothCursorsPlain USER_DEFINED 190
+C 05c78b24
+C 05c78b24
+F 05c78fa8 select_DrawFighterPairIcons USER_DEFINED 468
+F 05c791c0 select_DrawCornerMarker USER_DEFINED 98
+F 05c7923c select_DrawCostumeSelectLeft USER_DEFINED 306
+F 05c793b8 select_DrawCostumeSelectRight USER_DEFINED 260
+F 05c79504 select_MoveColorCursor USER_DEFINED 848
+F 05c79940 select_QueueTransitionA USER_DEFINED 32
+F 05c79970 select_QueueTransitionB USER_DEFINED 32
+F 05c799a0 select_LoadSprites11 USER_DEFINED 78
+F 05c79a04 select_ReleaseSprites11 USER_DEFINED 66
+F 05c79a58 select_InitScreenAndDraw11 USER_DEFINED 160
+C 05c799a0
+F 05c79b24 select_UpdateModeMenuInput USER_DEFINED 300
+C 05c79940
+C 05c7923c
+C 05c79504
+F 05c79c9c select_UpdateOptionMenuInput USER_DEFINED 340
+C 05c79970
+C 05c793b8
+C 05c79504
+F 05c7ac5c select_UpdateMainInput USER_DEFINED 3448
+C 05c79a04
+C 05c79b24
+C 05c79c9c
+C 05c78a00
+C 05c78690
+C 05c78690
+C 05c79a58
+C 05c793b8
+C 05c78760
+C 05c78760
+C 05c78be0
+C 05c78e30
+C 05c7db50
+C 05c78d1c
+C 05c780c0
+C 05c78da4
+C 05c780d4
+C 05c7d560
+C 05c78134
+C 05c78fa8
+C 05c791c0
+C 05c7d560
+C 05c78134
+C 05c78fa8
+C 05c791c0
+C 05c78e30
+C 05c78760
+C 05c7923c
+C 05c788b0
+C 05c7d308
+F 05c7d2c4 select_SaveAndClearChoices USER_DEFINED 40
+F 05c7d308 select_ResetToTitleState USER_DEFINED 220
+C 05c78010
+C 05c7d46c
+C 05c7db50
+C 05c7d980
+C 05c7d2c4
+C 05c7e078
+F 05c7d46c select_UpdatePlayerSlotAssignment USER_DEFINED 202
+F 05c7d560 select_ResetScreenAndSound USER_DEFINED 110
+C 05c7db50
+C 05c7d680
+F 05c7d64c select_ClearTwoTables16 USER_DEFINED 44
+F 05c7d680 select_InitAndClearTables USER_DEFINED 54
+C 05c7d64c
+F 05c7d980 select_DrawMarkersByMode USER_DEFINED 110
+F 05c7db50 select_ReleaseResourcesByMode USER_DEFINED 304
+F 05c7e078 select_InitVdp2Display USER_DEFINED 400

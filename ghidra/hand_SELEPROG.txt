@@ -1,0 +1,44 @@
+0x05c78000 func stub_05c78000 hand bad-instruction stub at SELEPROG overlay start, halt_baddata, no real code
+0x05c78010 func select_PickNextFreeSlot hand provisional: advances counter, loops slot 0-7 until callee accepts, stores choice and ORs mask
+0x05c780c0 func select_ToggleFlagA hand provisional: toggles a 0/1 byte flag
+0x05c780d4 func select_ToggleFlagB hand provisional: toggles a second 0/1 byte flag
+0x05c780e8 func select_CountSelectableFighters hand provisional: counts set bits 0-15 via callee test, stores count
+0x05c78134 func select_CountSelectableExtraFighters hand provisional: counts callee-true entries from index 8 up to param
+0x05c78194 func select_CompareAndAdvanceIndex hand provisional: returns param equals counter, post-increments counter
+0x05c781ac func select_DrawStatRows hand provisional: draws six rows of table-indexed sprites via position and draw callees
+0x05c78324 func select_LoadMenuSpriteSet17 hand provisional: loads nine resources then 17 table entries into stored handles
+0x05c783bc func select_ReleaseMenuSpriteSet17 hand provisional: nine resource calls then 17 table entries passed to release callee
+0x05c78444 func select_DrawSprites12 hand provisional: loops 12 entries setting position then drawing sprite from table
+0x05c78558 func select_InitScreenAndLoadSprites22 hand provisional: sets VDP2 layer params, loads 9 resources and 22 sprites, clears selection rows
+0x05c78690 func select_ReleaseSprites22 hand provisional: nine resource calls, 22 table entries released, final call arg 4
+0x05c78730 func select_CheckIndexMatch hand provisional: returns 1 or 2 if param matches counter and mode 1 or 2, increments counter
+0x05c78760 func select_DrawPlayerLabelRows hand provisional: picks sprite set by mode, draws four labeled rows with position and sprite calls
+0x05c788b0 func select_DrawCursorsAndIcons16 hand provisional: draws 16 icon entries then two cursor sprites at fixed table slots
+0x05c78a00 func select_ResetCursorSprites hand provisional: sets cursor params, redraws both players' stock sprite columns toward 3
+0x05c78b24 func select_GetFighterGridX hand provisional: computes sprite x for fighter index from table and extra-fighter count
+0x05c78be0 func select_DrawFighterCursors hand provisional: places both players' portrait cursors from table or computed pos, draws highlight sprite
+0x05c78d1c func select_DrawP1Cursor hand provisional: positions player 1 cursor by fighter index and draws sprite 0
+0x05c78da4 func select_DrawP2Cursor hand provisional: positions player 2 cursor offset +5 and draws sprite 1
+0x05c78e30 func select_DrawBothCursorsPlain hand provisional: draws both cursors at fighter positions with sprite arg 0
+0x05c78fa8 func select_DrawFighterPairIcons hand provisional: draws two fighter icons by index with row offset, uses grid-x logic
+0x05c791c0 func select_DrawCornerMarker hand provisional: draws marker sprite 0x16 and a second sprite at left or right by mode 3 or 0x1a
+0x05c7923c func select_DrawCostumeSelectLeft hand provisional: draws left player's color panel, jump table switch, per-slot sprites with bytes
+0x05c793b8 func select_DrawCostumeSelectRight hand provisional: draws right player's color panel offset 0x17, jump table, per-slot sprites
+0x05c79504 func select_MoveColorCursor hand provisional: maps pad bits to slot 1-8, updates color index wraps 0-7, redraws cursors and sprites
+0x05c79940 func select_QueueTransitionA hand provisional: picks one of two label addresses by flag bit 8, passes to callee
+0x05c79970 func select_QueueTransitionB hand provisional: picks one of two label addresses by flag bit 8, passes to callee
+0x05c799a0 func select_LoadSprites11 hand provisional: calls setup then loads 11 table entries into stored handles
+0x05c79a04 func select_ReleaseSprites11 hand provisional: setup call then 11 table entries released
+0x05c79a58 func select_InitScreenAndDraw11 hand provisional: sets VDP2 layer params, loads setup, draws 11 sprites from table
+0x05c79b24 func select_UpdateModeMenuInput hand provisional: reads pad, direction -1/+1, wraps cursor 0-7, redraws menu with cursor sprites
+0x05c79c9c func select_UpdateOptionMenuInput hand provisional: reads pad, moves cursor wrap 0-11 skipping 4-7 block, redraws highlight
+0x05c7d2c4 func select_SaveAndClearChoices hand provisional: copies four selection bytes to saved copies then zeroes two current ones
+0x05c7d308 func select_ResetToTitleState hand provisional: clears selection globals, resets layers, mode 3 check, sets state 8 and calls sound with 0x1c
+0x05c7d46c func select_UpdatePlayerSlotAssignment hand provisional: assigns each slot's chosen fighter by mode, toggles ready flags when both match
+0x05c7d560 func select_ResetScreenAndSound hand provisional: clears flags, resets layers, sets flags to 1, issues sound command 0x1c
+0x05c7d64c func select_ClearTwoTables16 hand provisional: zeroes two 16-entry longword tables
+0x05c7d680 func select_InitAndClearTables hand provisional: calls init then zeroes two tables of N+1 longwords, returns init result
+0x05c7d980 func select_DrawMarkersByMode hand provisional: by mode 1/3 and 2/3 positions p1 and p2 markers at x=idx*5+2 and draws sprite
+0x05c7db50 func select_ReleaseResourcesByMode hand provisional: mode 3 releases ten resources else three, then 11 table entries and extra items
+0x05c7e078 func select_InitVdp2Display hand provisional: sets VDP2 scroll, color-offset, priority, window and shadow params, sound 0x1c, final call
+0x05c7ac5c func select_UpdateMainInput hand provisional: giant per-frame select-screen state machine, reads two pads, jump tables, cursor moves, mode transitions

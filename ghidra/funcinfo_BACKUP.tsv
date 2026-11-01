@@ -1,0 +1,23 @@
+F 00200000 stub_00200000 USER_DEFINED 1
+F 00200fe6 backup_InitMenuState USER_DEFINED 90
+F 00201078 backup_ReadPadDirection USER_DEFINED 64
+F 002010cc backup_MoveMenuCursor USER_DEFINED 150
+C 002011b8
+F 002011b8 backup_DrawDebuggerScreen USER_DEFINED 836
+F 0020159a backup_RunItemAction USER_DEFINED 116
+F 0020162c backup_RunItemActionAlt USER_DEFINED 118
+F 002016c0 backup_LoadItemValue USER_DEFINED 92
+F 00201734 backup_LoadIndexedValue USER_DEFINED 64
+F 002017c4 backup_CycleItemValue USER_DEFINED 120
+F 00201880 backup_AdjustNumberWrap USER_DEFINED 96
+F 002018fc backup_StepNumberBy1 USER_DEFINED 26
+F 00201924 backup_StepNumberBy10 USER_DEFINED 26
+F 0020194c backup_StepNumberBy100 USER_DEFINED 26
+F 00201974 backup_ApplyConstantParam USER_DEFINED 30
+F 002019a0 backup_FetchItemParam USER_DEFINED 80
+F 00201a08 backup_CallWithGlobal USER_DEFINED 24
+F 00201a30 backup_ChainActionA USER_DEFINED 26
+F 00201a58 backup_ChainActionB USER_DEFINED 26
+F 00201a80 backup_ChainActionC USER_DEFINED 26
+F 00201aa8 backup_ChainActionD USER_DEFINED 26
+F 00201ad0 backup_ChainActionE USER_DEFINED 26

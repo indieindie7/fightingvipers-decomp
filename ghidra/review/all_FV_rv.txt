@@ -1,0 +1,1089 @@
+AAFV 0x0604a9b0 cdc_ReleaseSelectorWait CONFIRM cdc_ReleaseSelectorWait deletes all sector data of selector, waits, clears in-use flag
+AAFV 0x0604aae0 cdc_QueueCommandEntry RENAME cdc_QueueFilterSetup queue entry is processed by SetFilterMode/Subheader/Range steps
+AAFV 0x0604ade0 cdc_PollCommandResult CONFIRM cdc_PollCommandResult reads status into buffer and returns HIRQ; used as status poll by all callers
+AAFV 0x0604aff8 gfs_QueueTransferEntry RENAME cdc_QueueFilterConnection three-index entries drained by SetFilterConnection (true/false outputs, -2 none)
+AAFV 0x0604b0e8 cdc_SeekFadAndSetSector RENAME cdc_LoadFileInfoById arg is file id checked vs directory scope then info entry fetched; not a FAD seek
+AAFV 0x0604b1c4 cdc_GetStatusValue RENAME cdc_GetFreeBufferBlocks returns third output of GetBufferSize
+AAFV 0x0604b1f4 cdc_PollStatusLoop CONFIRM cdc_PollStatusLoop per-tick service: timeout, HIRQ, status, steps 8 state machines
+AAFV 0x0604b2e8 gfs_StateQueryDispatch CONFIRM gfs_StateQueryDispatch per-machine jump table query used by tick loop
+AAFV 0x0604b36c gfs_StateActionDispatch CONFIRM gfs_StateActionDispatch per-machine jump table step call
+AAFV 0x0604b400 cdc_WaitWhileBusy CONFIRM cdc_WaitWhileBusy sets timeout and loops tick while result is 1
+AAFV 0x0604b438 gfs_ProcessRequestQueue RENAME cdc_ProcessFilterSetupQueue drains 0x14-byte entries via SetFilterMode, Subheader, Range
+AAFV 0x0604b62c gfs_StepStateMachineA RENAME cdc_StepSetDeviceConnection state1 SetCdDeviceConnection, state2 wait HIRQ 0x40
+AAFV 0x0604b6b4 gfs_StepReadSizeMachine CONFIRM gfs_StepReadSizeMachine gets sector count and actual data size in states
+AAFV 0x0604b808 gfs_StepStateMachineB RENAME cdc_StepGetSectorData state1 GetSectorData, state2 wait HIRQ
+AAFV 0x0604b89c gfs_StepSeekPlayMachine RENAME cdc_StepDeleteSectorData calls DeleteSectorData(sel,start,count) then waits HIRQ; no play or seek
+AAFV 0x0604b9cc gfs_StepFiveStateMachine RENAME cdc_StepMoveSectorData save filter mode, MoveSectorData, wait HIRQ, restore mode
+AAFV 0x0604bb28 gfs_StepFileOpenMachine RENAME cdc_StepChangeDirectory checks id vs scope, issues dir change with filter 0x17, waits HIRQ
+AAFV 0x0604bd38 gfs_ProcessFilterQueue CONFIRM gfs_ProcessFilterQueue drains 12-byte entries into SetFilterConnection
+AAFV 0x0604bed4 gfs_ResetWorkState RENAME cdc_ResetManagerState clears slot flags, queue counts, state words of CD manager
+AAFV 0x0604bfbc cdc_WaitHirqRetry CONFIRM cdc_WaitHirqRetry bounded retry on HIRQ bit then clear
+AAFV 0x0604bff8 cdc_ExecCommandDispatch CONFIRM cdc_ExecCommandDispatch runs command with retry then maps result by table
+AAFV 0x0604c094 gfs_InitFileHandle CONFIRM gfs_InitFileHandle fills handle from record or id lookup, sector math
+AAFV 0x0604c1dc gfs_SetFileSizeLimit UNSURE gfs_SetFileSizeLimit +0x54 total and +0x58 available semantics unclear
+AAFV 0x0604c218 gfs_GetFileHandleInfo CONFIRM gfs_GetFileHandleInfo optional out fields copied from handle
+AAFV 0x0604c440 gfs_StartFileRead CONFIRM gfs_StartFileRead builds read request and submits, returns 2 started or 8
+AAFV 0x0604c4a8 gfs_SeekFileSector CONFIRM gfs_SeekFileSector seek request with start plus interleave-adjusted sector
+AAFV 0x0604c540 gfs_ApplyInterleaveOffset CONFIRM gfs_ApplyInterleaveOffset maps index with unit and gap bytes
+AAFV 0x0604c58c cdc_GetStatusDispatch RENAME cdc_ClassifyStatus callers compare returned class 3/4/5/6 as drive error states
+AAFV 0x0604c610 cdc_FlagsToCode CONFIRM cdc_FlagsToCode flag bits to constant code, neutral name
+AAFV 0x0604c650 gfs_StateTableDispatch CONFIRM gfs_StateTableDispatch jump table by state below 7
+AAFV 0x0604c6b0 gfs_CalcReadChunk CONFIRM gfs_CalcReadChunk computes next chunk size and range with state out
+AAFV 0x0604c80c gfs_InitFileHandleFromDir CONFIRM gfs_InitFileHandleFromDir fills handle from directory record, start 0
+AAFV 0x0604c944 gfs_SetReadPosition_2 RENAME gfs_SetReadPositionDevice type-1 handle callback table slot; clamp and window update
+AAFV 0x0604c998 gfs_UpdateFlag2FromReg CONFIRM gfs_UpdateFlag2FromReg bit1 from register bit 0x10
+AAFV 0x0604c9d8 gfs_InitFileHandleChecked CONFIRM gfs_InitFileHandleChecked name check callback then fill like FromDir
+AAFV 0x0604cb38 gfs_SetReadPosition_2 RENAME gfs_SetReadPositionStream type-2 stream handle callback; same clamp logic
+AAFV 0x0604cba0 gfs_DispatchByType CONFIRM gfs_DispatchByType picks one of two list builders by flag
+AAFV 0x0604cbc8 gfs_FindDirEntryByName CONFIRM gfs_FindDirEntryByName 12-byte strncmp scan over 0x18-byte entries
+AAFV 0x0604cc74 cdc_WaitCommandResult RENAME cdc_ChangeDirectoryWait loops dir change request with filter 0x17, waits, returns count
+AAFV 0x0604cce0 gfs_BuildDirectoryList CONFIRM gfs_BuildDirectoryList parses records into 12-byte entries, matches stored table, clears entry words first
+AAFV 0x0604cf50 gfs_BuildDirectoryList_2 RENAME gfs_BuildDirectoryListNamed 24-byte entries with 12-byte name, appends extra entries; _2 suffix not descriptive
+AAFV 0x0604d170 gfs_DirReaderInit CONFIRM gfs_DirReaderInit sets handle, buffer, pos -1, block count
+AAFV 0x0604d190 gfs_DirReaderRead CONFIRM gfs_DirReaderRead buffered byte read with 2048-block refill via wait-read
+AAFV 0x0604d294 gfs_DirReadU16BE CONFIRM gfs_DirReadU16BE reads LE+BE pair, returns BE half
+AAFV 0x0604d2dc gfs_DirReadU32BE CONFIRM gfs_DirReadU32BE reads LE+BE pair, returns BE half
+AAFV 0x0604d33c gfs_DirAdvanceBlock CONFIRM gfs_DirAdvanceBlock reads length byte, on zero pad moves to next block and refills
+AAFV 0x0604d3b8 gfs_ParseDirRecord CONFIRM gfs_ParseDirRecord reads length, extent, size, flags, name; fills 12-char name
+AAFV 0x0604d796 gfs_InitEntryType4 CONFIRM gfs_InitEntryType4 fills extent/size, flag byte 4, marks list entry word 1
+AAFV 0x0604d7ec gfs_FindExtraEntryByName CONFIRM gfs_FindExtraEntryByName strncmp 12 over stored list, returns index and value
+AAFV 0x0604d94c gfs_StreamInit CONFIRM gfs_StreamInit zeroes fields, mode 3
+AAFV 0x0604d99c gfs_StreamSetAlign RENAME gfs_StreamSetTransferSize callers pass remaining byte count (+0x18); align only when state 6 resets
+AAFV 0x0604d9e6 gfs_StreamFlush CONFIRM gfs_StreamFlush pumps until idle, releases buffers, state 6; called from handle release
+AAFV 0x0604da98 gfs_StreamStep CONFIRM gfs_StreamStep per-state jump table, else loops pump state until 7
+AAFV 0x0604db1c gfs_StreamPumpWrite CONFIRM gfs_StreamPumpWrite allocs chunk, slot call, counts bytes, state 0 or 6
+AAFV 0x0604db8c gfs_StreamPumpState CONFIRM gfs_StreamPumpState state-indexed jump table when enabled
+AAFV 0x0604dc98 gfs_StreamAllocChunk CONFIRM gfs_StreamAllocChunk chunk = min(remaining, limit, per-unit share), allocs if none
+AAFV 0x0604ddac dma_SetupCopyRegs RENAME dma_StartCopyWithTail DMA copies len>>2 words, saves len&3 tail and advanced addrs
+AAFV 0x0604de18 dma_CheckAndFinish CONFIRM dma_CheckAndFinish polls channel 0, then copies saved tail bytes
+AAFV 0x0604e116 gfs_StreamAcquireSlot CONFIRM gfs_StreamAcquireSlot takes single static slot if free, else null
+AAFV 0x0604e144 gfs_StreamReleaseSlot CONFIRM gfs_StreamReleaseSlot advances position unless mode 4, frees slot
+AAFV 0x0604e172 gfs_StreamStartTransfer RENAME gfs_StreamSetCallbackMode stores callback and arg, sets state 4; callers pass func and handle
+AAFV 0x0604e278 gfs_OpenFileDevice CONFIRM gfs_OpenFileDevice allocs partition and selector, queues filter setup and connection, waits; 1 on success
+AAFV 0x0604e350 gfs_CloseFileDevice CONFIRM gfs_CloseFileDevice releases partition data and frees selector
+AAFV 0x0604e370 gfs_ReadFileChunk RENAME gfs_GetBufferedSectorCount body is a data-size query returning count, no read; callers use result as sector count
+AAFV 0x0604e418 gfs_SubmitRequest RENAME gfs_SetDeviceFilter stores params and queues filter-setup entry for the selector, waits
+AAFV 0x0604e474 gfs_GetAvailableBytes UNSURE gfs_GetAvailableBytes unit of queried value (sectors vs bytes) unclear from callers
+AAFV 0x0604e4c0 gfs_SeekDevice CONFIRM gfs_SeekDevice relative or absolute seek, drops buffered data or resets, tracks cache position
+AAFV 0x0604e894 cdc_ExecIfReady CONFIRM cdc_ExecIfReady runs command only if HIRQ bit 0x40 set else -1
+AAFV 0x0604f004 gfs_InitDeviceHandle CONFIRM gfs_InitDeviceHandle sets type 1, resolves id, clears counters
+AAFV 0x0604f40c sys_InitSubsystems CONFIRM sys_InitSubsystems interrupt mask, SMPC, matrix stack, VDP1/draw env init sequence
+AAFV 0x060504ac math_DivuSetup32 RENAME math_DivU32 loads hardware divider with dividend and divisor and returns the quotient; handles zero and huge divisor
+AAFV 0x060504d0 math_DivuSetupSigned RENAME math_DivS32 sign-extends dividend into high reg, returns quotient; callers use as plain divide
+AAFV 0x06050528 math_Atan2Setup RENAME math_Atan2 abs of both, octant by signs and compare, DIVU ratio, jump table returns angle; 19 callers
+AAFV 0x06058248 vdp1_SubmitFrameCommands CONFIRM vdp1_SubmitFrameCommands waits flag then terminates list, flushes, waits draw end, restarts frame
+AAFV 0x06058262 vdp1_SubmitFrameCommands_2 RENAME vdp1_SubmitFrameCommandsNoWait same body without leading flag wait; suffix replaced
+AAFV 0x06058352 vdp1_TerminateCommandList CONFIRM vdp1_TerminateCommandList writes end command, waits for consumer, updates seed
+AAFV 0x0605839e vdp1_FlushQueuedEntries CONFIRM vdp1_FlushQueuedEntries walks 8 slots, DMA kick for flagged entries
+AAFV 0x06058466 sgl_ConditionalDispatch CONFIRM sgl_ConditionalDispatch calls handler pointer if gbr+0xb4 zero and status bit 0x20
+AAFV 0x06058480 vdp1_UpdateSlotMask CONFIRM vdp1_UpdateSlotMask computes slot bit from address and clears it in mask at gbr+0xb2
+AAFV 0x06058740 math_DecomposeByTable RENAME math_BinaryToBcd subtracts 7 decimal place constants, packs digit counts as nibbles; callers format numbers
+AAFV 0x060588a8 sgl_SetPackedPair CONFIRM sgl_SetPackedPair stores two words and packs high halves; callers pass byte<<0x14 and byte<<0x13
+AAFV 0x060588bc matrix_LoadColumns CONFIRM matrix_LoadColumns copies four vec3 into columns of top matrix
+AAFV 0x06059864 vdp2_SetResolutionMode CONFIRM vdp2_SetResolutionMode checks change then runs body; sets mode flags and screen offsets
+AAFV 0x0605986c vdp2_SetResolutionMode_2 RENAME vdp2_SetResolutionModeNoCheck same body without leading change check; suffix replaced
+AAFV 0x06059924 vdp2_CheckResolutionChange RENAME vdp2_ApplyModeIfCompatible returns 0 if bit2 differs else updates mode byte and writes TVMD-derived value to four regs
+AAFV 0x06059a80 math_SetupDivuWindow CONFIRM math_SetupDivuWindow abs arg into DIVU dividend, divisor from gbr+0x84, queues entry, mirrors VDP2 regs
+AAFV 0x06059aec matrix_StoreTransposed CONFIRM matrix_StoreTransposed copies top matrix 4 rows of 3 to output with stride 3 transposing
+AAFV 0x06059b0c matrix_FlipZ CONFIRM matrix_FlipZ calls matrix_Scale with 1.0,1.0,-1.0
+AAFV 0x06059b30 sgl_CalcViewMatrix CONFIRM sgl_CalcViewMatrix copies cur matrix rows to camera entry and derives translation via 16.16 mul
+AAFV 0x0605a030 vdp2_SetPlaneAddrA RENAME vdp2_SetMapRotA stores map base, writes 8 identical map regs at shadow +0x110..0x11e (rotation param A map table)
+AAFV 0x0605a0c2 vdp2_SetMapSelectBits CONFIRM vdp2_SetMapSelectBits rewrites 2-bit select fields in shadow +0xce
+AAFV 0x0605a124 vdp2_SetMapOffset4 CONFIRM vdp2_SetMapOffset4 packs map offset bits to reg +0x38; single caller
+AAFV 0x0605a188 vdp2_SetPlaneAddrB RENAME vdp2_SetMapNbg0 four map addrs into shadow +0x100/+0x102, base +0x1fc, offset nibble +0xfd low
+AAFV 0x0605a238 vdp2_SetShadowRegFbLow2 CONFIRM vdp2_SetShadowRegFbLow2 literal low-2-bit set of byte +0xfb
+AAFV 0x0605a244 vdp2_SetShadowRegE8Byte CONFIRM vdp2_SetShadowRegE8Byte stores OR of two flags to byte +0xe8
+AAFV 0x0605a24c vdp2_SetScrollA_ZoomWindow RENAME vdp2_SetMapNbg1 same map-register pattern as plane variants (+0x104/+0x106, base +0x200); no zoom or window
+AAFV 0x0605a300 vdp2_SetShadowRegFbBits2 CONFIRM vdp2_SetShadowRegFbBits2 literal bits 2-3 of byte +0xfb
+AAFV 0x0605a30c vdp2_SetShadowRegEbNibble CONFIRM vdp2_SetShadowRegEbNibble literal low nibble merge into byte +0xeb
+AAFV 0x0605a320 vdp2_SetScrollB_ZoomWindow RENAME vdp2_SetMapNbg2 map regs +0x108/+0x10a, base +0x204, offset byte +0xfc low
+AAFV 0x0605a3d0 vdp2_SetShadowRegFbBits4 CONFIRM vdp2_SetShadowRegFbBits4 literal bits 4-5 of byte +0xfb
+AAFV 0x0605a3e0 vdp2_SetShadowRegEbHigh CONFIRM vdp2_SetShadowRegEbHigh literal high bits merge into byte +0xeb
+AAFV 0x0605a3f0 vdp2_SetScrollC_ZoomWindow RENAME vdp2_SetMapNbg3 map regs +0x10c/+0x10e, base +0x208, offset byte +0xfc high
+AAFV 0x0605a4a4 vdp2_SetShadowRegFbBits6 CONFIRM vdp2_SetShadowRegFbBits6 literal bits 6-7 of byte +0xfb
+AAFV 0x0605a4de vdp2_SetShadowRegShift5 CONFIRM vdp2_SetShadowRegShift5 stores arg>>5 to work word +0x3ac
+AAFV 0x0605a504 vdp2_SetShadowPair2F4 RENAME vdp2_SetScrollPosXY stores two 16.16 values and packs their integer high halves at +0x154
+AAFV 0x0605a514 mem_StoreByteAtOffset CONFIRM mem_StoreByteAtOffset byte store at base+const; used as table setter
+AAFV 0x0605a520 mem_Store4LongsTwice CONFIRM mem_Store4LongsTwice writes four longs to two global blocks
+AAFV 0x0605a540 vdp2_SetShadowRegE0Mask CONFIRM vdp2_SetShadowRegE0Mask or low half, clear high-half bits in +0xe0
+AAFV 0x0605a550 vdp2_BuildCyclePatternTable CONFIRM vdp2_BuildCyclePatternTable builds VRAM access cycle patterns per layer enable bits
+AAFV 0x0605a890 vdp2_FillCyclePatternRun CONFIRM vdp2_FillCyclePatternRun fills cycle entries with run marker; helper of builder
+AAFV 0x0605a8c8 vdp2_FillCyclePatternRepeat CONFIRM vdp2_FillCyclePatternRepeat replicates value then fills entries with repeat marker
+AAFV 0x0605a8fa vdp2_StoreCyclePatternEntry CONFIRM vdp2_StoreCyclePatternEntry writes 3-byte entry; sole caller is builder
+AAFV 0x0605a96c vdp2_SetShadowRegEaByte CONFIRM vdp2_SetShadowRegEaByte stores OR of two flags to byte +0xea
+AAFV 0x0605a974 gfx_InitMatrixStackBase CONFIRM gfx_InitMatrixStackBase stores matrix buffer base/half and current ptr then clears two transforms
+AAFV 0x0605a9a4 math_SetIdentityTransform CONFIRM math_SetIdentityTransform zero fields, unit 0x10000 scale slots
+AAFV 0x0605a9dc math_BuildReciprocalTable CONFIRM math_BuildReciprocalTable fills table with DIVU reciprocals
+AAFV 0x0605aa78 vdp2_SetShadowRegFaBits2 CONFIRM vdp2_SetShadowRegFaBits2 literal bits 2-3 of byte +0xfa
+AAFV 0x0605ab7c vdp2_LoadColorOffsetTable RENAME vdp2_SetMapRotATable calls rot map base setter then fills 8 map words (+0x110 table); no color offset
+AAFV 0x0605abd4 gfx_SetWord178 CONFIRM gfx_SetWord178 stores halfword to +0x178
+AAFV 0x0605abdc vdp2_SetShadowRegCeNibble CONFIRM vdp2_SetShadowRegCeNibble top nibble of +0xce mirrored to global
+AAFV 0x0605abfc gfx_QueueCommand34 CONFIRM gfx_QueueCommand34 range check 1..7 then appends command 0x34
+AAFV 0x0605ac24 vdp2_SetShadowReg1A4Nibble0 CONFIRM vdp2_SetShadowReg1A4Nibble0 literal low nibble set
+AAFV 0x0605ac30 vdp2_SetShadowReg1A4Nibble1 CONFIRM vdp2_SetShadowReg1A4Nibble1 literal bits 4-7 set
+AAFV 0x0605ac44 vdp2_SetShadowReg1A4Nibble2 CONFIRM vdp2_SetShadowReg1A4Nibble2 byte-swapped nibble merge
+AAFV 0x0605ac54 vdp2_SetShadowReg1A4Nibble3 CONFIRM vdp2_SetShadowReg1A4Nibble3 byte-swapped bits 4-7 set
+AAFV 0x0605ac6c vdp2_SetShadowReg1A6Nibble0 CONFIRM vdp2_SetShadowReg1A6Nibble0 literal low nibble set
+AAFV 0x0605ac78 vdp2_SetShadowReg1A6Nibble1 CONFIRM vdp2_SetShadowReg1A6Nibble1 literal bits 4-7 set
+AAFV 0x0605ac8c math_DivuStart RENAME math_FixedDiv DIVU 64/32 with dividend shifted left 16 gives 16.16 divide and returns quotient reg
+AAFV 0x0605aca0 math_BcdToInt CONFIRM math_BcdToInt four packed BCD bytes to decimal
+AAFV 0x0605acd4 vdp2_SetWindowCoords CONFIRM vdp2_SetWindowCoords packs two coord pairs, x doubled in low-res
+AAFV 0x0605acfc gfx_InstallHandlerAndSync CONFIRM gfx_InstallHandlerAndSync sets handler ptr between two indexed smpc command calls
+AAFV 0x0605ad68 gfx_InitSystemDma RENAME gfx_InitSystem whole system init: mode tables, DMAC copies, font expand, work area; not only DMA
+AAFV 0x0605ae86 gfx_Expand2bppFont CONFIRM gfx_Expand2bppFont 2-bit glyph to 16-bit pixels with palette offset
+AAFV 0x0605aeb6 gfx_Expand4bppFont CONFIRM gfx_Expand4bppFont nibble glyph to 16-bit words with offset
+AAFV 0x0605aee6 dma_StartWithMatrixInit CONFIRM dma_StartWithMatrixInit starts DMAC copy and inits 0x100 scale fields in dest struct
+AAFV 0x0605af48 dma_StartCopy CONFIRM dma_StartCopy waits ch0 idle then sets src dst count
+AAFV 0x0605b1e4 mem_CopyEightLongs CONFIRM mem_CopyEightLongs copies 8 longs from const table
+AAFV 0x0605ba0a mem_ClearBlock512 CONFIRM mem_ClearBlock512 zeroes 512 bytes
+AAFV 0x0605ba1c gfx_BuildShadeTables CONFIRM gfx_BuildShadeTables clamped 32x32 shade table plus 32-entry ramp
+AAFV 0x0605bd78 cpu_EnableCache CONFIRM cpu_EnableCache writes CCR with enable bit
+AAFV 0x0605c65e gfx_LinkSpriteEntry CONFIRM gfx_LinkSpriteEntry alloc node, link into depth bucket, copy and scale params
+AAFV 0x0605cc56 dma_StartChannel1Copy CONFIRM dma_StartChannel1Copy waits ch1 idle then starts copy
+AAFV 0x0605ce18 gfx_InitVdp1Transfer CONFIRM gfx_InitVdp1Transfer registers handlers and clears 8 transfer slots
+AAFV 0x0605ced0 gfx_ProcessTransferChannels CONFIRM gfx_ProcessTransferChannels state machine over 8 slots issuing DMA queue
+AAFV 0x0605d0ec gfx_QueueDmaTransfer CONFIRM gfx_QueueDmaTransfer fills DMA request, splits on wrap
+AAFV 0x0605d13e gfx_WaitDmaSlotFree CONFIRM gfx_WaitDmaSlotFree busy-wait on slot/status
+AAFV 0x0605d2a0 gfx_InitDrawEnv CONFIRM gfx_InitDrawEnv sets cmd list ptrs, screen size tables, clip defaults
+AAFV 0x0605d3cc mem_StoreByteAtOffset_2 RENAME mem_StoreByteAtOffsetB same stub as 0605a514 with another offset; drop numeric suffix
+AAFV 0x0605d3d8 gfx_AppendSystemClipCmd RENAME gfx_SetViewWindow sorted rect, far-limit, center origin, cmd 0x10; callers are view window setup
+AAFV 0x0605d474 vdp2_SetShadowReg0E2 RENAME vdp2_SetMosaicSize packs (h-1)&0xf and (v-1)<<4 into high byte, v halved when interlaced
+AAFV 0x0605d498 vdp2_SetShadowRegE8Flags CONFIRM vdp2_SetShadowRegE8Flags flags into +0xe8 plus base and offset bits
+AAFV 0x0605d4bc gfx_SetCallback340 CONFIRM gfx_SetCallback340 stores callback, default stub when null
+AAFV 0x0605d4cc dma_IsChannel0Busy CONFIRM dma_IsChannel0Busy returns ch0 control status==1
+AAFV 0x0605d4d8 pad_ResetEdgeBuffer CONFIRM pad_ResetEdgeBuffer sets three halfwords to 0xffff
+AAFV 0x0605d4e2 pad_UpdateEdgeStates CONFIRM pad_UpdateEdgeStates computes press/release masks from prev state
+AAFV 0x0605d804 pad_ReadByteInit CONFIRM pad_ReadByteInit copies byte, resets edge buffer; caller parses peripheral data
+AAFV 0x0605d950 math_InvertMatrix3x4 CONFIRM math_InvertMatrix3x4 pivoted elimination with DIVU reciprocals
+AAFV 0x0605ddb4 mem_CopyStridedBytes CONFIRM mem_CopyStridedBytes copies bytes at stride 2 into packed groups
+AAFV 0x0605ddf0 mem_AppendStridedBytes CONFIRM mem_AppendStridedBytes appends 32 stride-2 bytes under limit
+AAFV 0x0600406c mem_SwapWords CONFIRM mem_SwapWords exchanges words between two buffers
+AAFV 0x06004254 sys_SetupHwRegs16 CONFIRM sys_SetupHwRegs16 writes 16-bit halves to fixed hw regs
+AAFV 0x0600448c sys_ClearVectorRegs CONFIRM sys_ClearVectorRegs zeroes 15 regs and installs VBR+0x30 handler
+AAFV 0x06004a0c sys_ClearFrameCounters RENAME pad_ClearInputState globals 678d4/678d8 are per-pad button masks read by pad remap
+AAFV 0x06004a44 pad_ConvertButtonBits UNSURE pad_ConvertButtonBits builds per-pad 22-entry table doubled by mask bits; purpose unclear
+AAFV 0x06004b3a hit_ScanSphereTable UNSURE hit_ScanSphereTable calls fn ptrs from 8-byte table and fills triples; fragment
+AAFV 0x06004d68 fight_CheckGuardInput UNSURE fight_CheckGuardInput builds mask from guard states; role unclear
+AAFV 0x06004e12 fight_UpdateMotionStep CONFIRM fight_UpdateMotionStep tracks motion frame change and builds input mask
+AAFV 0x06004ec4 fight_FindFirstSetBit CONFIRM fight_FindFirstSetBit scans 22 bits for set bit
+AAFV 0x06004eec fight_ClearFlagBits CONFIRM fight_ClearFlagBits clears mask bits in byte via regs
+AAFV 0x06004ef6 fight_CheckMotionFlag UNSURE fight_CheckMotionFlag returns 1 or constant by flag bit0 and param compare; role unclear
+AAFV 0x06004f14 fight_ClassifyPairState CONFIRM fight_ClassifyPairState derives pair state code from both fighters flags
+AAFV 0x060050d4 fight_UpdatePairInteraction CONFIRM fight_UpdatePairInteraction classifies pair then body push and wall push
+AAFV 0x060051a4 fight_ResolveBodyPush CONFIRM fight_ResolveBodyPush separation vector via fixed divide pushes fighters apart
+AAFV 0x06005304 fight_ResolveWallAndPush CONFIRM fight_ResolveWallAndPush large pair position resolve calling body push
+AAFV 0x060055b6 fight_GetMotionFrameLimit UNSURE fight_GetMotionFrameLimit returns 0x100 or pointer to table; not a limit
+AAFV 0x060055e4 math_FixedSqrt CONFIRM math_FixedSqrt bitwise integer sqrt used by distance code
+AAFV 0x06005616 math_FixedDivide RENAME math_FixedSqrt64 same 2-bit shift-subtract as sqrt, 32 steps; used as distance root in body push
+AAFV 0x0600564e fight_UpdateFighterPhysics UNSURE fight_UpdateFighterPhysics huge per-frame update; only partly visible
+AAFV 0x06005ab4 math_Distance2D CONFIRM math_Distance2D sqrt of dx2+dy2
+AAFV 0x06005adc math_Atan2Delta CONFIRM math_Atan2Delta angle of delta via atan2 helper
+AAFV 0x06005b20 fight_ComputeFacingAngle RENAME fight_SpreadPairAlongAngle moves both fighters to midpoint plus/minus half distance along angle
+AAFV 0x06005bcc fight_ComputeFacingAngle_2 RENAME fight_PlaceFighterAlongAngle places one fighter at distance along angle from other
+AAFV 0x060068e4 fight_ClearVelocity UNSURE fight_ClearVelocity zeroes three fighter fields; meaning of fields unknown
+AAFV 0x06006bcc fight_CheckArenaBounds CONFIRM fight_CheckArenaBounds bitmask of wall contact vs limit
+AAFV 0x06006de0 math_RotateVec2 RENAME math_RotateMatrixY rotates x,z pairs of three matrix rows by sin/cos
+AAFV 0x06006ed8 math_MatrixAddScaledAxis CONFIRM math_MatrixAddScaledAxis adds scaled axis column to translation
+AAFV 0x06006f0a math_TransformPointScale CONFIRM math_TransformPointScale axis times scale plus translation
+AAFV 0x06006fa0 math_TransformPoint2 CONFIRM math_TransformPoint2 two scaled axes plus translation
+AAFV 0x06006ff6 math_MatrixRotate2x2A CONFIRM math_MatrixRotate2x2A rotates matrix element pairs by cos/sin
+AAFV 0x06007080 math_MatrixRotate2x2B CONFIRM math_MatrixRotate2x2B same rotation on elements 0,6 1,7 2,8
+AAFV 0x0600710a math_MatrixRotate2x2C CONFIRM math_MatrixRotate2x2C same rotation on offsets 0xc,0x18 columns
+AAFV 0x06007378 math_MatrixTranspose3x3 RENAME math_MatrixRotateZ90Copy negates and swaps columns 0/1 in place and copies to dest, not a transpose
+AAFV 0x060074b0 sys_NullStub2 UNSURE sys_NullStub2 bare return but size 82; callers odd, likely bad disassembly
+AAFV 0x060075f0 task_InitQueues CONFIRM task_InitQueues clears two -1 terminated tables, resets heads, sets callback
+AAFV 0x06007704 queue_PushEntry CONFIRM queue_PushEntry stores value at head slot, hangs if full
+AAFV 0x06007710 queue_PushEntry_2 RENAME queue_PushVblankCallback second queue fed with callback fn addrs by vblank install
+AAFV 0x06007832 fight_InitFighterState CONFIRM fight_InitFighterState initializes fighter struct fields and facing angle
+AAFV 0x06007c80 fight_SelectStanceByInput UNSURE fight_SelectStanceByInput reads pad bits to set halfwords; meaning unclear
+AAFV 0x06007dec fight_GetShortByDirSign RENAME fight_GetPlayerMaxLife per-player short; cross-multiplied with life in gauge ratio compare
+AAFV 0x06007e08 fight_GetShortByDirSign_2 RENAME fight_GetPlayerLife per-player short from fighter structs, feeds life bar draw and smoothing
+AAFV 0x06007e24 fight_GetByteByDirSign RENAME fight_GetPlayerWinCount per-player byte used as loop count of drawn markers
+AAFV 0x06007e40 fight_CopyShortTriple CONFIRM fight_CopyShortTriple copies three halfwords to output
+AAFV 0x06007e68 fight_UpdateAttackState UNSURE fight_UpdateAttackState flag/frame checks building small bitmask; role unclear
+AAFV 0x06008162 fight_ShiftHitList RENAME fight_AddScaledPoseDelta adds scale times delta to 21 joint values and 12 triples
+AAFV 0x060081c6 fight_ProcessHitQueue RENAME fight_ComputePoseDelta fixed-point scale times (next-prev) over 21 values, not a hit queue
+AAFV 0x06008414 fight_ResolveHits RENAME anim_LoadPoseByStance picks one of five 0x39-word tables by state id, copies, rebases, mirrors by facing
+AAFV 0x06008580 fight_SwapHitPair RENAME anim_RebasePoseToRoot subtracts first/third word offsets from six triples, not a hit swap
+AAFV 0x060085a4 math_MultiplyPair64 RENAME anim_DecodePackedPoseSet five decode-packed-track plus rebase call pairs, no multiply
+AAFV 0x06008670 math_NegateMatrixRows RENAME anim_MirrorPose negates and swaps pose fields and mirrors angles against constant, left-right flip
+AAFV 0x060087d8 gfx_QueueCommand0x30 CONFIRM gfx_QueueCommand0x30 pushes cmd 0x30 plus handler to queue then runs proximity copy
+AAFV 0x06008812 gfx_CopyEntries RENAME col_BuildProximityMasks squared distance of point pairs vs threshold builds bitmasks per row, no copy
+AAFV 0x060088c8 gfx_QueueCommandAndClear RENAME col_RunCullPassAndWait queues cmd 0x30, runs cull pass, busy-waits counter, keeps running maxima
+AAFV 0x0600895c gfx_CacheFlushDraw RENAME col_RunCullWithCacheReset writes cache control 0x11 around cull loop and stores two results
+AAFV 0x06008a50 gfx_DrawCullLoop RENAME col_FindClosestPartPair loops part masks, squared 16.16 distances, calls segment test; no drawing
+AAFV 0x06008bbc gfx_ProjectVertices RENAME col_TestSegmentDistance dot-product closest-point test writing divide unit regs, no projection
+AAFV 0x06008cbc gfx_DrawFighterModel RENAME fight_ComputeBodyExtents per body part min/max extents vs bounds into masks, caller is camera code
+AAFV 0x060096f0 sys_DispatchModeTable CONFIRM sys_DispatchModeTable calls table function indexed by global mode
+AAFV 0x06009728 sys_DispatchSubModeTable CONFIRM sys_DispatchSubModeTable calls table function indexed by global submode
+AAFV 0x060098b8 math_SinLookup RENAME math_RandSignedOffset calls RandNext, scales, adds base, negates by bit; no sin table
+AAFV 0x060098f4 fight_GetSideScale RENAME fight_GetDirectionAxisValue picks per-player struct, returns +/- axis value by direction code 0-3
+AAFV 0x06009a60 list_WalkNodes RENAME gfx_FindFirstVisibleNode transforms each point triple, returns first with positive depth else -1
+AAFV 0x06009aac sys_CallIndexedHandler RENAME snd_QueueIndexedCommand passes indexed table entry to snd_QueueCommand
+AAFV 0x06009b24 sys_CallIndexedHandlerRet CONFIRM sys_CallIndexedHandlerRet calls table function by global index returns result
+AAFV 0x06009d28 fight_AdvanceTimer UNSURE fight_AdvanceTimer step counter to 0x10 drives velocity/bounce fields; role unclear
+AAFV 0x06009e16 fight_ComputeAbsDelta RENAME fight_ClassifyDirection4 compares abs of two deltas, stores dominant axis/sign code 0-3 at +0xd
+AAFV 0x0600a090 math_MatrixMulVecA RENAME math_RotateMatrixPairXZ saturating 2D rotate of matrix elements 0 and 2 by two factors
+AAFV 0x0600a1cc math_MatrixMulVecB RENAME math_RotateMatrixPairXY saturating 2D rotate of matrix elements 0 and 1 by two factors
+AAFV 0x0600a244 math_RotateAxis CONFIRM math_RotateAxis sin/cos from tables at >>4 index rotates two matrix elements
+AAFV 0x0600a308 math_VecDotNormalize RENAME math_MatrixMulVectorLoop loop of saturating multiply-adds with matrix, no normalize
+AAFV 0x0600a3b2 math_MatrixTranslateRot CONFIRM math_MatrixTranslateRot adds rotated offsets into translation column
+AAFV 0x0600a408 math_MatrixSetRotZ RENAME math_MatrixFromYawAndAngles sets Y-axis rotation block then applies three RotateAxis
+AAFV 0x0600a422 math_RotateXYZ_Word CONFIRM math_RotateXYZ_Word three RotateAxis calls on word triple
+AAFV 0x0600a446 math_RotateXYZ_Short CONFIRM math_RotateXYZ_Short same with shorts
+AAFV 0x0600a470 math_RotateZYX_Word CONFIRM math_RotateZYX_Word reverse order
+AAFV 0x0600a494 math_MatrixFromAngleZ RENAME math_MatrixFromInverseAngles uses angle[2] for X-rotation block then negated angles 1 and 0
+AAFV 0x0600a4f4 math_MatrixFromAngleZ_2 RENAME math_MatrixFromInverseAnglePair same build with register angles and delta of two angle sets
+AAFV 0x0600a564 math_MatrixFromAngleX CONFIRM math_MatrixFromAngleX sin/cos of first angle then rotates by others
+AAFV 0x0600a5bc math_RotateYXZ_Short CONFIRM math_RotateYXZ_Short three RotateAxis order Y,Z,X
+AAFV 0x0600a5e4 math_PointToLocal UNSURE math_PointToLocal inverse transform then squared-distance style compare; purpose unclear
+AAFV 0x0600a6a4 math_PointToLocalScaled UNSURE math_PointToLocalScaled variant with dot and row set; purpose unclear
+AAFV 0x0600a7b8 math_TransformInverse CONFIRM math_TransformInverse subtracts translation then multiplies by transposed matrix
+AAFV 0x0600a822 math_DotVec3 RENAME math_MatrixMulVec3 three row dot products of 3-vector, output triple
+AAFV 0x0600a890 math_MatrixSetRow RENAME math_MatrixMulVec2Store two-term products stored to three slots at +0xc
+AAFV 0x0600a9b8 sys_CallIndirectStub RENAME sys_CallResetFrameLoop only calls sys_ResetFrameLoop through pointer
+AAFV 0x0600a9e4 gfx_SelectScreenParams RENAME sys_DecodePadDirection decodes pad bits of chosen player to direction 0-7 and repeat count
+AAFV 0x0600aac8 gfx_UpdateScrollList UNSURE gfx_UpdateScrollList copies eight table-mapped words into two arrays; use unclear
+AAFV 0x0600ab24 gfx_LookupByIndex RENAME snd_QueueCommandByIndex char table entry shifted 8 plus const to snd_QueueCommand
+AAFV 0x0600ab4c gfx_InitSpriteEntry RENAME gfx_BuildTextStrip copies font glyph cells per string char into strip buffer
+AAFV 0x0600abd0 gfx_DrawStringOrSprite RENAME sys_FormatNumberString builds padded digit string, optional hex flag
+AAFV 0x0600ad24 gfx_BlitTileRowA RENAME vdp2_CopyMapRowsAdd copies halfwords into 0x40-wide map pages with add and page wrap
+AAFV 0x0600ae40 gfx_BlitTileRowB RENAME vdp2_FillMapRows same page-wrap loop filling constant value
+AAFV 0x0600af44 vdp2_SetupBackground UNSURE vdp2_SetupBackground two word copies plus two player flag checks; background role unproven
+AAFV 0x0600af8c vdp2_SelectLayerA RENAME gfx_CopyPlayerBufA copies words into per-player work RAM buffer, not VDP2 select
+AAFV 0x0600afc4 vdp2_SelectLayerB RENAME gfx_CopyPlayerBufB same copy into second region of player buffer
+AAFV 0x0600affc vdp2_SelectLayerC RENAME gfx_CopyPlayerBufStridedA loops copies with 0x18 source stride into buf A
+AAFV 0x0600b044 vdp2_SelectLayerD RENAME gfx_CopyPlayerBufStridedB loops 5 strided copies into buf B with player struct checks
+AAFV 0x0600b0b4 vdp2_WaitFrameFlags RENAME gfx_CopyBothPlayerBufs no waiting; copies both player buffers gated by flag bits
+AAFV 0x0600b124 sys_CheckPlayerFlag RENAME gfx_CopyPlayerBufsByFlags copies bufs for one player gated by byte 0x5f bits
+AAFV 0x0600b3e8 vdp2_SetBackColor UNSURE vdp2_SetBackColor packs two RGB555 triples to halfwords but target unknown
+AAFV 0x0600b78c menu_DrawEntry RENAME menu_DrawWindowFrame draws title, side borders and bottom of window box
+AAFV 0x0600b89c menu_ReadInputOption RENAME menu_DrawItemList draws item rows and clears rest, no input read
+AAFV 0x0600ba64 menu_DrawCursor RENAME menu_DrawScrollMarkers writes up/down arrow and blank cells
+AAFV 0x0600bb70 sys_ChainedCall3 RENAME str_DecomposeToAscii decompose value by table then DecToAsciiN
+AAFV 0x0600bc00 pad_ReadMenuButtons RENAME menu_HandleInput moves cursor and scroll then dispatches selected item by type
+AAFV 0x0600be02 sys_CallTableByR1 CONFIRM sys_CallTableByR1 calls function table entry indexed by r1
+AAFV 0x0600be28 sys_RepeatCall RENAME menu_ClearRows prints blank row per window height
+AAFV 0x0600be64 gfx_CallScaled CONFIRM gfx_CallScaled passes two bytes shifted to pair setter
+AAFV 0x0600be8c menu_SetEntryActive RENAME menu_AddWindowToList sets active bit and appends window to doubly linked list
+AAFV 0x0600bed2 list_UnlinkNode RENAME menu_UnlinkWindow unlinks window and fixes head tail selected
+AAFV 0x0600bf10 menu_AdvanceEntry RENAME menu_InitWindow copies template fields and allocates text buffer
+AAFV 0x0600bfcc str_HexToAscii CONFIRM str_HexToAscii eight nibbles to digits
+AAFV 0x0600bfec str_DecToAsciiPadded CONFIRM str_DecToAsciiPadded BCD nibbles with leading blanks
+AAFV 0x0600c028 str_DecToAsciiN CONFIRM str_DecToAsciiN BCD nibbles width N with blank pad
+AAFV 0x0600c064 str_FormatSignedNumber CONFIRM str_FormatSignedNumber signed 16.16 value with decimal point
+AAFV 0x0600c154 mem_ClearHeader RENAME mem_DmaFillRegion stores word then overlapping DMA copy and wait
+AAFV 0x0600c188 vdp2_GetCellAddress RENAME menu_GetCellAddress window buffer base plus y*pitch plus x
+AAFV 0x0600c198 vdp2_GetPage32Address CONFIRM vdp2_GetPage32Address nametable offset with page split at 32
+AAFV 0x0600c1c0 vdp2_GetPage64Address CONFIRM vdp2_GetPage64Address nametable offset with page split at 64
+AAFV 0x0600c1e4 text_PrintString CONFIRM text_PrintString writes fixed count of char cells
+AAFV 0x0600c21c text_PrintStringCount CONFIRM text_PrintStringCount writes until NUL and returns count
+AAFV 0x0600c254 sys_ResetStateGlobals RENAME mem_InitHeap sets heap pointers used by allocator
+AAFV 0x0600c270 list_FindFreeNode RENAME mem_AllocBlock first-fit free list plus bump allocation
+AAFV 0x0600c2dc vs_ScreenMain RENAME fight_StartMatch resets both fighters, queues task, runs init and loop
+AAFV 0x0600c398 vs_InitMatchState RENAME fight_InitFighter per fighter init of fn pointers tables and fields
+AAFV 0x0600c604 fight_ResetRoundState CONFIRM fight_ResetRoundState clears per-player fields and start x
+AAFV 0x0600c67c fight_CopyPlayerStatsBoth RENAME fight_SavePrevFrameStateBoth runs prev-frame snapshot for both fighters
+AAFV 0x0600c68c fight_CopyPlayerStats RENAME fight_SavePrevFrameState copies current state to previous slots
+AAFV 0x0600c762 fight_RunKOCheck RENAME fight_RunFrame per-frame loop: pair update, snapshot, fighter update, wait
+AAFV 0x0600c82c fight_CheckTimeoutOrKO RENAME fight_UpdateFighter full per-fighter update chain
+AAFV 0x0600c968 fight_UpdateRoundEnd RENAME fight_ResolvePairInteraction compares paired states and sets reaction motions
+AAFV 0x0600cb82 fight_CheckHitStun RENAME fight_CommitPendingState moves pending state into 0x3c
+AAFV 0x0600cbf6 fight_DispatchAttackState CONFIRM fight_DispatchAttackState table call by state at 0x3c
+AAFV 0x0600d034 fight_DispatchHitReaction CONFIRM fight_DispatchHitReaction table call by state at 0x6c
+AAFV 0x0600fdec math_RotateAndScale RENAME fight_SolveArcFramesIter iterates decaying velocity counting frames
+AAFV 0x0600ff18 fight_UpdateWallAndKnockback CONFIRM fight_UpdateWallAndKnockback flag cascade with wall pushback
+AAFV 0x060101a8 fight_NormalizeAngleDelta CONFIRM fight_NormalizeAngleDelta wraps and clamps angle difference
+AAFV 0x060101fe fight_UpdateKnockbackPosition CONFIRM fight_UpdateKnockbackPosition knockback position update
+AAFV 0x0601044c fight_UpdateFlagsPerFrame UNSURE fight_UpdateFlagsPerFrame large flag routine, role mixed
+AAFV 0x060105d8 fight_GetTargetXZ RENAME fight_IsMovementNegligible returns 0 when both velocity parts small
+AAFV 0x06010628 fight_UpdateFacingAngle CONFIRM fight_UpdateFacingAngle derives facing from angle and flags
+AAFV 0x060106cc fight_UpdateAnimationState CONFIRM fight_UpdateAnimationState per-frame animation state update
+AAFV 0x06010c34 fight_ComputeHitSituation CONFIRM fight_ComputeHitSituation distance and angle between fighters
+AAFV 0x06011444 fight_UpdateKnockbackPos CONFIRM fight_UpdateKnockbackPos saves prev pos then adds velocity
+AAFV 0x060114a0 fight_SteerTowardTarget RENAME fight_RotateVelocityByFacing sin cos rotation of velocity
+AAFV 0x060117c4 fight_ApplyDamage_entry CONFIRM fight_ApplyDamage_entry prefix entry of ApplyDamage
+AAFV 0x060117c8 fight_ApplyDamage CONFIRM fight_ApplyDamage subtracts health at 0x54
+AAFV 0x0601182c fight_BeginMotionHold CONFIRM fight_BeginMotionHold sets hold flag and saves fields
+AAFV 0x06011878 fight_ResetWallBounceVelocity RENAME fight_RotateVelocityToPos rotates velocity by facing into position
+AAFV 0x06011914 fight_CalcJumpArcFrames CONFIRM fight_CalcJumpArcFrames quadratic with sqrt for airtime
+AAFV 0x060119c0 fight_CalcWallDistance CONFIRM fight_CalcWallDistance distance to wall along facing
+AAFV 0x06011ab4 math_TransformVecPair CONFIRM math_TransformVecPair transforms two points
+AAFV 0x06011b08 math_VecPairToAngle CONFIRM math_VecPairToAngle angle from transformed pair
+AAFV 0x06011be4 fight_SetMotion_entry CONFIRM fight_SetMotion_entry prefix entry of SetMotion
+AAFV 0x06011be8 fight_SetMotion CONFIRM fight_SetMotion sets motion id resets frame loads move data
+AAFV 0x06011e02 fight_LoadMoveData CONFIRM fight_LoadMoveData loads move table entry
+AAFV 0x0601241c fight_FindMoveEntry CONFIRM fight_FindMoveEntry walks entries by id until terminator
+AAFV 0x06012452 fight_UpdateMotionFrame CONFIRM fight_UpdateMotionFrame advances frame counter
+AAFV 0x06012bb8 fight_FlipMoveInputBits CONFIRM fight_FlipMoveInputBits mirrors left right bits by facing
+AAFV 0x06012c1e fight_ClearFlag08 CONFIRM fight_ClearFlag08 clears bit 8
+AAFV 0x06012c38 fight_SetFlag08Call CONFIRM fight_SetFlag08Call sets bit 8 then calls helper
+AAFV 0x06012c5c fight_FindMotionEvent CONFIRM fight_FindMotionEvent scans events by type
+AAFV 0x06012c8c fight_GetMotionEventFrame CONFIRM fight_GetMotionEventFrame returns event frame
+AAFV 0x06012ce4 fight_AdvanceHitstunFrame UNSURE fight_AdvanceHitstunFrame frame step by flags, hitstun not shown
+AAFV 0x06012d64 fight_SeekMotionFrameRev CONFIRM fight_SeekMotionFrameRev reverse seek via SetMotion
+AAFV 0x06012d78 fight_SeekMotionFrame CONFIRM fight_SeekMotionFrame forward seek via SetMotion
+AAFV 0x06012dbc fight_CheckHitFollowup CONFIRM fight_CheckHitFollowup hit effect then followup motion
+AAFV 0x06012e6e fight_LoadHitboxPair RENAME fight_LoadCharParamPair two words from 8-byte table by fighter id
+AAFV 0x06012e94 fight_SumGuardCounters UNSURE fight_SumGuardCounters sums fields by flags, guard unproven
+AAFV 0x06012f6c fight_InitStartPositions CONFIRM fight_InitStartPositions copies spawn table into both fighters
+AAFV 0x0601309c sys_WaitFrameCounter CONFIRM sys_WaitFrameCounter polls ack with counter limit
+AAFV 0x060130f0 sys_ResetFrameLoop RENAME sys_ReloadSoundDriver calls driver load, SeGame and StageSound loads
+AAFV 0x0601319c snd_QueueCommand CONFIRM snd_QueueCommand puts command in free slot
+AAFV 0x060131ca snd_PushCommandBuf CONFIRM snd_PushCommandBuf appends word to buffer
+AAFV 0x06013248 snd_PlayCue_A CONFIRM snd_PlayCue_A clears flag queues constant
+AAFV 0x0601326c snd_PlayCuePairWait CONFIRM snd_PlayCuePairWait two cues then waits
+AAFV 0x060132a4 snd_PlayCue_B CONFIRM snd_PlayCue_B clears flag queues constant
+AAFV 0x060132d8 snd_UpdateBgmFade UNSURE snd_UpdateBgmFade ramps value, fade role unproven
+AAFV 0x06013380 snd_PlayStageBgm CONFIRM snd_PlayStageBgm plays from stage table
+AAFV 0x060133b4 snd_PlayStageBgm_2 RENAME snd_PlayStageBgmAlt second slot variant, drop numeric suffix
+AAFV 0x060133e8 snd_SendFixedCmd CONFIRM snd_SendFixedCmd queues constant
+AAFV 0x060133fc snd_SendCmdValue CONFIRM snd_SendCmdValue queues command with value
+AAFV 0x06013418 snd_PlayTableEntry CONFIRM snd_PlayTableEntry table lookup then push
+AAFV 0x06013448 snd_PlaySelectedBgm CONFIRM snd_PlaySelectedBgm override or table pick then push
+AAFV 0x06013484 snd_PlayVoiceCueP1 CONFIRM snd_PlayVoiceCueP1 voice by character index
+AAFV 0x06013510 snd_PlayVoiceCueP2 CONFIRM snd_PlayVoiceCueP2 player 2 variant
+AAFV 0x0601359c snd_TickDelayedCue CONFIRM snd_TickDelayedCue countdown then queue cue
+AAFV 0x060135f0 snd_PlayCueFixed_1 RENAME snd_PlayCueFixedA drop numeric suffix
+AAFV 0x06013608 snd_PlayCueFixed_2 RENAME snd_PlayCueFixedB drop numeric suffix
+AAFV 0x06013620 snd_PlayCueFixed_3 RENAME snd_PlayCueFixedC drop numeric suffix
+AAFV 0x06013638 snd_PlayCueFixed_4 UNSURE snd_PlayCueFixed_4 numeric suffix invalid; cue constant not visible
+AAFV 0x06013650 snd_PlayCueFixed_5 UNSURE snd_PlayCueFixed_5 numeric suffix invalid; cue constant not visible
+AAFV 0x06013680 snd_PlayCueFixed_6 UNSURE snd_PlayCueFixed_6 numeric suffix invalid; no callers
+AAFV 0x06013698 snd_PlayCueFixed_7 UNSURE snd_PlayCueFixed_7 numeric suffix invalid; cue constant not visible
+AAFV 0x060136b0 snd_PlayCueFixed_8 UNSURE snd_PlayCueFixed_8 numeric suffix invalid; cue constant not visible
+AAFV 0x060137b0 gfx_UnpackTexture2bpp RENAME anim_UnpackChannelFlags expands 2-bit channel codes for 0x39 animation channels
+AAFV 0x06013888 fight_UpdateAnimStep CONFIRM fight_UpdateAnimStep steps fighter animation
+AAFV 0x060139be fight_RotateBodyPoints CONFIRM fight_RotateBodyPoints rotates body point triples
+AAFV 0x06013bf8 fight_BuildBodyMatrix CONFIRM fight_BuildBodyMatrix builds body matrix
+AAFV 0x06013d68 fight_BuildBoneMatrixP1 CONFIRM fight_BuildBoneMatrixP1 bone matrices player 1
+AAFV 0x06013f40 fight_BuildBoneMatrixP2 CONFIRM fight_BuildBoneMatrixP2 bone matrices player 2
+AAFV 0x06014140 fight_BuildRootMatrix CONFIRM fight_BuildRootMatrix builds root matrix
+AAFV 0x060141d8 fight_UpdateWallPush RENAME fight_AlignBodyToVelocity atan2 on velocity steers two angles; no wall logic
+AAFV 0x060142da anim_DecodeKeyframeTrackA CONFIRM anim_DecodeKeyframeTrackA keyframe track decode
+AAFV 0x0601449c anim_InterpolateTrackA CONFIRM anim_InterpolateTrackA interpolates keyframes
+AAFV 0x0601451a anim_DecodeKeyframeTrackB CONFIRM anim_DecodeKeyframeTrackB keyframe track decode
+AAFV 0x060146d8 anim_InterpolateTrackB CONFIRM anim_InterpolateTrackB interpolates keyframes
+AAFV 0x06014748 anim_DecodePackedTrack CONFIRM anim_DecodePackedTrack packed track decode
+AAFV 0x06014818 anim_DecodeKeyframeTrackC RENAME anim_DecodeKeyframeStartPose decodes start pose of keyframe pair
+AAFV 0x06014890 anim_DecodeKeyframeTrackD RENAME anim_DecodeKeyframeEndPose decodes end pose of keyframe pair
+AAFV 0x0601491c math_EulerToMatrix CONFIRM math_EulerToMatrix euler angles to matrix
+AAFV 0x06014a18 math_RotateMatrixAxis CONFIRM math_RotateMatrixAxis rotates matrix about axis
+AAFV 0x06014c4c input_ReadPadBits_P1 CONFIRM input_ReadPadBits_P1 reads pad 1
+AAFV 0x06014ccc input_ReadPadBits_P2 CONFIRM input_ReadPadBits_P2 reads pad 2
+AAFV 0x06014d4c input_UpdateCommandBuffer CONFIRM input_UpdateCommandBuffer 0x3f masked command buffer
+AAFV 0x060159c0 input_CopyDirHistory4 CONFIRM input_CopyDirHistory4 copies 4 dir entries
+AAFV 0x060159dc input_CopyDirHistory3 CONFIRM input_CopyDirHistory3 copies 3 dir entries
+AAFV 0x060159f4 input_UpdateButtonState CONFIRM input_UpdateButtonState button state update
+AAFV 0x06015ace input_TrackDirectionChange CONFIRM input_TrackDirectionChange tracks direction changes
+AAFV 0x06015b7e input_DispatchCommand_A CONFIRM input_DispatchCommand_A command parser fragment using handler table (weak)
+AAFV 0x06015b94 input_DispatchCommand_B CONFIRM input_DispatchCommand_B command parser fragment using handler table (weak)
+AAFV 0x06015baa input_DispatchCommand_C CONFIRM input_DispatchCommand_C command parser fragment using handler table (weak)
+AAFV 0x06015bd4 input_DispatchCommand_D CONFIRM input_DispatchCommand_D command parser fragment using handler table (weak)
+AAFV 0x06016394 fight_CheckHitConfirm UNSURE fight_CheckHitConfirm no callers; FindMoveEntry result ignored
+AAFV 0x060163d4 replay_ClearIdBuffers CONFIRM replay_ClearIdBuffers clears id buffers (weak)
+AAFV 0x060163fc replay_ClearRecordBuffers CONFIRM replay_ClearRecordBuffers clears record buffers (weak)
+AAFV 0x06016424 replay_StoreFighterIds CONFIRM replay_StoreFighterIds stores fighter ids
+AAFV 0x060167c4 replay_FrameStep CONFIRM replay_FrameStep per-frame replay step
+AAFV 0x06016844 replay_SaveFighterState CONFIRM replay_SaveFighterState saves fighter state
+AAFV 0x060168f2 replay_ProcessQueue CONFIRM replay_ProcessQueue walks 0x14-byte queue entries
+AAFV 0x06016b18 sys_TickPauseCheck RENAME sys_DispatchModeOnFlag tests flag 0x80 then dispatches mode table or sub-mode table
+AAFV 0x06016b8c replay_PushSnapshot CONFIRM replay_PushSnapshot pushes snapshot ring slot
+AAFV 0x06016bc8 replay_PopSnapshot CONFIRM replay_PopSnapshot pops snapshot ring slot
+AAFV 0x06016c08 replay_RecordPadByte CONFIRM replay_RecordPadByte records pad byte
+AAFV 0x06016c5c replay_PlayStep CONFIRM replay_PlayStep plays back pad byte
+AAFV 0x06016cf8 replay_PlaybackTick RENAME replay_RecordTick arms recording via StartRecord for both pads when idle else counts down
+AAFV 0x06016d88 replay_StartRecord CONFIRM replay_StartRecord starts recording
+AAFV 0x06016fd8 replay_RewindIndex CONFIRM replay_RewindIndex rewinds ring index
+AAFV 0x06017004 replay_SaveRoundState CONFIRM replay_SaveRoundState copies round state into 0x18-byte slot plus DMA block
+AAFV 0x0601713a replay_LoadRoundState CONFIRM replay_LoadRoundState restores slot and DMA copies block back
+AAFV 0x060171d0 replay_CompareStates RENAME replay_CheckSlotIdsMatch compares first two id bytes of 8 slots against base slot
+AAFV 0x06017270 vdp_LoadSpriteSetA RENAME replay_PackRecordBlock RLE-encodes two replay buffers and fills header with ids
+AAFV 0x060173b8 vdp_LoadSpriteSetB RENAME replay_UnpackRecordBlock clears work area and restores ids/state from block header
+AAFV 0x06017510 vdp_LoadSpriteSetIndexed RENAME replay_UnpackRecordBlockIndexed DMA block from table by index then restores header state
+AAFV 0x06017684 mem_RleEncode CONFIRM mem_RleEncode run-length encodes bytes
+AAFV 0x060176ec mem_RleDecode CONFIRM mem_RleDecode expands run-length pairs or raw copies
+AAFV 0x060178fc fight_StartRoundResult CONFIRM fight_StartRoundResult picks result timer from table by health/flags (weak)
+AAFV 0x060179b4 fight_SetKnockdownTimer CONFIRM fight_SetKnockdownTimer loads timer from per-character table
+AAFV 0x060179ec math_FixedMulAccum RENAME math_TransformVectorByMatrix multiplies vector component by three matrix entries with saturation, accumulates
+AAFV 0x06017a16 cam_SetupPerspective RENAME cam_CalcViewDistance sum of squares of three shorts then FixedSqrt stores distance
+AAFV 0x06017aa8 cam_ApplyViewTransform CONFIRM cam_ApplyViewTransform rotates with shifted angles and calls table entry
+AAFV 0x06017b00 cam_SetupViewport RENAME cam_DrawRotatedPolyPart pushes matrix, rotates, draws polygon part, pops
+AAFV 0x06017b58 gfx_ClearFlagWord CONFIRM gfx_ClearFlagWord zeroes flag word
+AAFV 0x06017b68 gfx_MaskFlags CONFIRM gfx_MaskFlags masks flag word with 0xc
+AAFV 0x06017ca8 draw_FighterModel CONFIRM draw_FighterModel picks draw path and draws parts by flags
+AAFV 0x06017e16 draw_TranslateAndBack CONFIRM draw_TranslateAndBack translate call translate back
+AAFV 0x06017e46 draw_ChooseAnimFrame CONFIRM draw_ChooseAnimFrame picks frame from motion flags and counters (weak)
+AAFV 0x06017edc draw_CallFighterHook_A CONFIRM draw_CallFighterHook_A per-character pointer table call
+AAFV 0x06017f3a draw_ApplyObjectTransform CONFIRM draw_ApplyObjectTransform translate rotate three axes
+AAFV 0x06017f72 draw_CallFighterHook_B CONFIRM draw_CallFighterHook_B second per-character pointer table call
+AAFV 0x06017f98 draw_InitShadowTransform UNSURE draw_InitShadowTransform copies 0x12-byte preset and sets mode 4; shadow link unproven
+AAFV 0x06018004 draw_SelectLightTable_entry RENAME draw_SelectTransformPresetAlt picks 0x14-byte preset by flags 8/0x40, no light evidence; alternate table
+AAFV 0x06018010 draw_SelectLightTable RENAME draw_SelectTransformPreset picks 0x14-byte preset by flags 8/0x40 and copies transform fields
+AAFV 0x0601806e draw_ShadowPass CONFIRM draw_ShadowPass loops table offsets drawing under fighter
+AAFV 0x060180c0 cam_CalcFollowAngle RENAME draw_SetShadowProjection clamps camera pitch, table lookup, rotates; only caller is shadow pass
+AAFV 0x06018148 draw_ScaleFighterShadow CONFIRM draw_ScaleFighterShadow translate scale by param draw
+AAFV 0x06018194 vdp_QueueCommandBlock CONFIRM vdp_QueueCommandBlock copies 0x30 bytes and queues entry
+AAFV 0x06018264 vdp_FlushQueuedPolys CONFIRM vdp_FlushQueuedPolys iterates 4-bit player mask drawing polygon parts
+AAFV 0x060182c0 vdp_SubmitPlayerMask CONFIRM vdp_SubmitPlayerMask 4 mask bits submit polygon part count 5
+AAFV 0x060182fc draw_FighterParts CONFIRM draw_FighterParts draws 0x16 parts via callbacks
+AAFV 0x06018390 math_ScaleVectorArray CONFIRM math_ScaleVectorArray scales fifteen 3-vectors
+AAFV 0x060183dc fight_CopyCameraTargets CONFIRM fight_CopyCameraTargets copies camera pose entries and builds tables (weak)
+AAFV 0x060183ec fight_SetCameraBetweenFighters RENAME cam_LoadPresetPose picks camera pose entries by index and id 9, no fighter-midpoint math
+AAFV 0x0601851c fx_ResetAll CONFIRM fx_ResetAll calls slot clears
+AAFV 0x06018544 fx_UpdateSparkSelect CONFIRM fx_UpdateSparkSelect chooses and queues spark events from flags
+AAFV 0x0601869c fx_ClearSlotTable16 CONFIRM fx_ClearSlotTable16 sixteen 16-byte slots to -1
+AAFV 0x060186b4 fx_QueueEvent CONFIRM fx_QueueEvent push into 16-entry ring
+AAFV 0x060186fc fx_TickSlots CONFIRM fx_TickSlots advances eight timed slots
+AAFV 0x060188c8 fx_ClearSlotTable4 CONFIRM fx_ClearSlotTable4 zeroes four 0x1c slots
+AAFV 0x060188e0 fx_SpawnAtOffset CONFIRM fx_SpawnAtOffset scales offset and calls handler table
+AAFV 0x060189c0 fx_SpawnHitSpark CONFIRM fx_SpawnHitSpark fills spark slot with random velocities
+AAFV 0x06018a90 fx_NextSparkSlot CONFIRM fx_NextSparkSlot ring index mod 4
+AAFV 0x06018aac fx_UpdateSparks CONFIRM fx_UpdateSparks advances four spark slots
+AAFV 0x06018b94 fx_SpawnTypeEight CONFIRM fx_SpawnTypeEight sets type 8 then spawns
+AAFV 0x06018bb0 fx_ClearSlotFlag CONFIRM fx_ClearSlotFlag zeroes slot halfword +0xe
+AAFV 0x06018bbc fx_InitSlotPos CONFIRM fx_InitSlotPos copies position once and marks active
+AAFV 0x06018bc0 fx_SpawnEffectOnce CONFIRM fx_SpawnEffectOnce copies position if flag zero then sets 1
+AAFV 0x06018be8 fx_AdvanceEffectFrame CONFIRM fx_AdvanceEffectFrame frame counter to 0x28 then reset
+AAFV 0x06018c38 fx_DrawSparkSprite CONFIRM fx_DrawSparkSprite draws sprite by frame
+AAFV 0x06018ce0 fx_DrawHitRing CONFIRM fx_DrawHitRing builds ring polygon with sin/cos tables
+AAFV 0x06018dfc game_SetRoundFlagsByMode RENAME game_SetFlagMaskByMode sets or clears mask in global flag word by byte; round link unproven
+AAFV 0x06019450 fighter_SelectIdleMotionPtr CONFIRM fighter_SelectIdleMotionPtr state 0xd, picks motion ptr by random from table
+AAFV 0x0601a3d4 fighter_CopyPositionTriplet CONFIRM fighter_CopyPositionTriplet copies three position words
+AAFV 0x0601a3ec game_ClearFlagByte CONFIRM game_ClearFlagByte writes zero to a global byte and returns zero
+AAFV 0x0601a3fc ai_SelectDefaultCommand CONFIRM ai_SelectDefaultCommand picks command byte from fighter state and random
+AAFV 0x0601a528 fighter_CommitNextState RENAME game_CommitNextState operates on global game state block not a fighter struct
+AAFV 0x0601c0a4 game_IsModeOne RENAME game_GetModeByte just returns the mode byte either way
+AAFV 0x0601c4cc mode_RunHandlerTable CONFIRM table dispatch of init/update by mode when not paused
+AAFV 0x0601c51c mode_RunHandlerTableSimple CONFIRM same dispatch with start-button check variant
+AAFV 0x0601c564 mode_CheckStartPressedSkip CONFIRM start press combos set next mode and return 1
+AAFV 0x0601c5e0 mode_EnterTitleState4 RENAME vdp2_ApplyScreenMode4 calls vdp2 resolution mode setter with 4; used by fight init too so not title
+AAFV 0x0601c610 mode_EnterState0x14 RENAME vdp2_ApplyScreenMode0x14 calls vdp2 resolution mode setter with 0x14
+AAFV 0x0601c6b4 mode_SetReadyFlag CONFIRM calls wrapper then sets flag to 1 returns 1
+AAFV 0x0601caac round_InitFight CONFIRM fight start setup of timer hud slots and states
+AAFV 0x0601ce84 round_StartIntro CONFIRM sets intro state and timer then advances mode
+AAFV 0x0601d140 round_JudgeWinner CONFIRM judge error text plus win count updates
+AAFV 0x0601d560 round_ClearEffectSlots CONFIRM zeroes active word of all hud/effect slots
+AAFV 0x0601d654 round_WaitContinueInput CONFIRM polls start bit and countdown for continue
+AAFV 0x0601d81c round_EndFightSequence CONFIRM sets result slots and branches to next state codes
+AAFV 0x0601d9fe round_AfterFightStateMachine CONFIRM post-fight state codes and clears effect slots
+AAFV 0x0601e184 vdp2_SaveAndDisableScroll UNSURE saves and masks a gbr halfword around menu calls; purpose unclear
+AAFV 0x0601e1d0 vdp2_UpdateRoundMarkers UNSURE picks two palette words by index into globals; not clearly vdp2 or round markers
+AAFV 0x0601e23c hud_ShowWinMarkers UNSURE activates hud slots and state 0x37; win marker role unproven
+AAFV 0x0601e2dc hud_HideWinMarkers UNSURE zeroes nine hud slots; win marker role unproven
+AAFV 0x0601e33c vdp2_SetLayerMask RENAME fighter_SelectActiveFighter ors flag word and stores pointer to P1 or P2 fighter struct
+AAFV 0x0601e36c fighter_LoadPaletteIndex UNSURE copies table halfword by character id into +0x3c; palette role unproven
+AAFV 0x0601e3b8 mem_CopyPaletteBlockA RENAME data_CopyCharBlockA copies long block from per-character table entry into per-player area after EN data load
+AAFV 0x0601e404 mem_CopyPaletteBlockB RENAME data_CopyCharBlockB second per-character block copy to per-player area
+AAFV 0x0601e520 fighter_InitState CONFIRM zeroes and initializes fighter struct
+AAFV 0x0601e93c fighter_UpdateTimers CONFIRM decrements timers and runs per-mode update calls
+AAFV 0x0601ea80 fighter_UpdateMotionAndHit CONFIRM large per-frame fighter update
+AAFV 0x0601f0c4 ai_CheckAttackTransitions CONFIRM runs condition tests then dispatches by action flag
+AAFV 0x0601f2b6 fighter_ResetMoveState RENAME fighter_DispatchMoveState resets on state change then dispatches via handler table by state
+AAFV 0x0601f408 fighter_LoadMoveWindow CONFIRM reads window values from motion table
+AAFV 0x0601f4bc ai_SetActionFlagIfActive CONFIRM conditional set of action bits in +0x35
+AAFV 0x0601f4e0 ai_TestGuardCondition CONFIRM tests flag words for guard/block states
+AAFV 0x0601f5a0 ai_TestFrameThreshold CONFIRM sets action bits when motion frame reaches threshold
+AAFV 0x0601f5cc ai_TestAttackWindow CONFIRM tests opponent flags and counters for attack opening
+AAFV 0x0601f700 ai_TestComboContinue UNSURE combo meaning not evidenced
+AAFV 0x0601f764 ai_TestRecoveryReady UNSURE recovery meaning not evidenced
+AAFV 0x0601f82c ai_TestJumpOrDodge CONFIRM pad bit plus negative velocity test sets action
+AAFV 0x0601f888 ai_TestThrowRange UNSURE no distance test seen; throw meaning unproven
+AAFV 0x0601f8dc ai_TestDirectionHold CONFIRM tests direction bits and timers
+AAFV 0x0601f938 ai_SetActionFlag35 CONFIRM sets constants into +0x35 and clears byte
+AAFV 0x060211e0 fighter_ProcessCommandBuffer UNSURE mostly resets move fields; command buffer not evident
+AAFV 0x060214f2 fighter_SetStanceByTimer UNSURE writes 4 or 0 by timer; stance unproven
+AAFV 0x06021508 fighter_ResetOnFlag RENAME fighter_StepMoveScript resets on flag else steps move script bytes with 0x7f terminator
+AAFV 0x060216ac ai_TestButtonMask CONFIRM returns mask from pad bit tests
+AAFV 0x060216d0 fighter_DistanceCheck CONFIRM predicted position squared distance and sqrt to opponent
+AAFV 0x0602175a fighter_PredictTrajectory CONFIRM integrates position over frames vs opponent range
+AAFV 0x0602180c game_CallTwiceHelper RENAME fighter_CheckHitReactionBoth clears global then calls hit reaction check twice (both fighters)
+AAFV 0x0602183c fighter_CheckHitReaction CONFIRM decides hit reaction applies damage and knockback
+AAFV 0x06021948 fighter_UpdateHitFlags CONFIRM ors bits into hit flag word from four fields
+AAFV 0x0602199c fighter_AddKnockbackVelocity CONFIRM adds scaled values to velocity fields
+AAFV 0x060219c8 fighter_QueueDrawAndKnock UNSURE queues draw and computes facing; knock part unproven
+AAFV 0x06021a1e fighter_ComputeFacingAndCamera CONFIRM facing distance and camera extents between fighters
+AAFV 0x06021fcc sound_CallWrapper RENAME cd_LoadMotComWrapper only calls cd_LoadMotCom
+AAFV 0x06021fe0 data_BuildTableOffsets_A CONFIRM calls offset builder with fixed table
+AAFV 0x06022014 data_BuildTableOffsets_P1 CONFIRM offset builder keyed by P1 character id
+AAFV 0x06022040 data_CallWithPlayerIdOne RENAME input_UpdateP2Selection calls input_UpdatePlayerSelection with P2 character id and 1
+AAFV 0x0602205c data_BuildTableOffsets_P2 CONFIRM offset builder keyed by P2 character id
+AAFV 0x06022088 data_BuildAllTableOffsets CONFIRM calls P1 P2 and A builders
+AAFV 0x0602209c data_BuildTableOffsets CONFIRM walks id/size pairs storing aligned offsets
+AAFV 0x060220cc motion_CopyPartPointers CONFIRM motion_CopyPartPointers rebases 0x28 part entries into per-player tables
+AAFV 0x06022140 motion_ClearPartFlagsOnToggle RENAME motion_TogglePartTableEnable toggles bit then clears or restores word +0x14 of 0x28 parts per side
+AAFV 0x060221c8 motion_RebaseModelPointers CONFIRM motion_RebaseModelPointers adds offset to nested short fields of 0x28 parts
+AAFV 0x0602220c gfx_BuildColorRamp32 CONFIRM gfx_BuildColorRamp32 scales rgb555 components per step with clamp 31
+AAFV 0x06022292 gfx_BuildShadedPalette CONFIRM gfx_BuildShadedPalette scales source colors by 32 light levels into palette
+AAFV 0x060223e4 vdp1_CopyCommandBlockA RENAME data_RebaseEntryBlockA copies 4 five-word entries adding base offset; no vdp1 access seen
+AAFV 0x06022424 vdp1_CopyCommandBlockB RENAME data_RebaseEntryBlockB same copy from second table; no vdp1 access seen
+AAFV 0x06022464 vdp1_SelectPlayerTables RENAME motion_CopyPlayerTableSet picks per-player source table then memcpy 0x18 words
+AAFV 0x060224c0 model_LoadPartsForFighter CONFIRM model_LoadPartsForFighter builds part pointer lists per fighter, skips in modes 4/5
+AAFV 0x0602262e model_SelectBaseOffsetA RENAME model_CopyBaseBlockA picks player offsets then memcpy words block when table entry nonzero
+AAFV 0x0602267c model_SelectBaseOffsetB RENAME model_CopyBaseBlockB picks player offsets then memcpy 0x40 words block
+AAFV 0x060226c4 main_WaitFrameLoop RENAME main_RunFrameLoop per-frame loop polls pad runs tasks submits vdp1 commands
+AAFV 0x0602278a input_DecodePadToMove UNSURE mixes pad decode with pause/text print paths; role unclear
+AAFV 0x0602298e game_CheckResetCombo CONFIRM game_CheckResetCombo checks both pad reset combo then sets mode and resets
+AAFV 0x06022a5c game_InitSubsystems CONFIRM game_InitSubsystems calls init helpers and loads bins
+AAFV 0x06022c18 game_InstallVblankHandlers RENAME game_InstallQueueCallbacks inits queues and pushes two callbacks; vblank unproven
+AAFV 0x06022c48 game_FrameStepLoop RENAME game_AdvanceRandomSeed bumps counter and steps random generator count&0x1f plus 1 times
+AAFV 0x06022cb8 game_SetGlobalDefault CONFIRM game_SetGlobalDefault stores constant and zero in two globals
+AAFV 0x06022cd4 gfx_TransformVertexBatch CONFIRM gfx_TransformVertexBatch fixed-point multiply of vertices by matrix words
+AAFV 0x06022dd0 gfx_DrawPolygonPart CONFIRM gfx_DrawPolygonPart transforms and writes quad list entries
+AAFV 0x06022ef4 gfx_DrawModelCached CONFIRM gfx_DrawModelCached transforms and queues polygons with depth bucket
+AAFV 0x060233d0 gfx_TransformVertexBatch_2 RENAME gfx_TransformVertexBatchCulled variant of vertex transform used by culled draw paths
+AAFV 0x06023458 gfx_DrawPolygonPart_2 RENAME gfx_DrawPolygonPartCulled backface-style test then writes quad entries
+AAFV 0x06023524 math_FixedMulSigned64 RENAME math_DotProductFixed two signed 32x32 products accumulated with saturation
+AAFV 0x0602365c gfx_TransformVertexBatch_3 RENAME gfx_TransformVertexBatchWithAux transform variant also walking a fifth param array
+AAFV 0x06023c20 stub_06023c20 UNSURE body only returns; size suggests undecoded code
+AAFV 0x06023fa8 gfx_ScaleDepthEntry CONFIRM gfx_ScaleDepthEntry scales point pairs by table entry chosen from depth word
+AAFV 0x06023ffc gfx_WriteSortEntry CONFIRM gfx_WriteSortEntry writes sort list entries with depth
+AAFV 0x06024108 gfx_DrawPolygonPart_3 RENAME gfx_DrawPolygonPartInlineDot polygon draw with inline dot product test
+AAFV 0x0602428c gfx_DrawModelCached_2 RENAME gfx_DrawModelCachedCulled cached model draw with culling test
+AAFV 0x060243fc gfx_ShiftScaleTable CONFIRM gfx_ShiftScaleTable shifts table entries by one until param matches stored
+AAFV 0x0602442c sound_CallWrapper_2 RENAME vdp2_CallInitScrollRegisters only calls vdp2 scroll register init
+AAFV 0x06024440 sound_CallWrapper_3 RENAME vdp2_CallSetPlaneAddresses only calls vdp2 plane address setup
+AAFV 0x06024454 game_UpdateFrameCounterFlag CONFIRM game_UpdateFrameCounterFlag counts frames on pad bit then inits scroll positions and fills block
+AAFV 0x0602464c sound_CallWrapper_4 RENAME menu_CallUpdateMainSelect only calls menu main select update
+AAFV 0x06024660 sound_CallWrapper_5 RENAME menu_CallRunSetupSequence only calls menu setup sequence
+AAFV 0x06024674 game_CallThreeHelpers RENAME menu_DrawOptionScreen calls option header layer and marker draws
+AAFV 0x0602469c sound_CallWrapper_6 RENAME menu_CallDrawOptionLabels only calls option label draw
+AAFV 0x06024794 menu_AdvanceCursorStep CONFIRM menu_AdvanceCursorStep steps 0..9 cursor counter and draws sprites
+AAFV 0x060247da menu_DrawCursorSprites CONFIRM menu_DrawCursorSprites draws cursor sprites from counter byte
+AAFV 0x06024958 menu_DrawSpriteB CONFIRM menu_DrawSpriteB calls vdp2 register write then draws entry 0xb
+AAFV 0x06024970 menu_InitCursorSelection CONFIRM menu_InitCursorSelection clears bytes then selects entries
+AAFV 0x060249bc game_CopyViewState RENAME menu_SyncGaugesAndSubSelect syncs gauges and sub-selection
+AAFV 0x06024a24 menu_SelectPlayerEntries CONFIRM menu_SelectPlayerEntries two player entries
+AAFV 0x06024ab0 sound_CallWrapper_7 RENAME hud_DrawSingleSpriteThunk thunk to single sprite draw
+AAFV 0x06024ac4 menu_CycleSelectionTimer CONFIRM menu_CycleSelectionTimer timer then index step
+AAFV 0x06024b20 sprite_PositionAndDrawEntry CONFIRM sprite_PositionAndDrawEntry table entry draw
+AAFV 0x06024b70 sprite_SetupAndDrawEntry CONFIRM sprite_SetupAndDrawEntry setup and draw
+AAFV 0x06024bfc sprite_SetupAndDrawEntry_2 RENAME sprite_SetupDrawEntryCopyLast variant copies last entry
+AAFV 0x06024c7c sprite_DrawEntryBasic CONFIRM sprite_DrawEntryBasic no finalize
+AAFV 0x06024d08 sprite_DrawEntryFlag40 CONFIRM sprite_DrawEntryFlag40 flag 0x40 draw
+AAFV 0x06024d58 sprite_DrawEntryFlag40Final CONFIRM sprite_DrawEntryFlag40Final flag 0x40 plus final
+AAFV 0x06024e44 game_NextRandomOffset UNSURE game_NextRandomOffset ring counter plus table byte unclear use
+AAFV 0x06024e6c combat_ResolveHit CONFIRM combat_ResolveHit damage resolution
+AAFV 0x06025adc combat_ApplyHitEffect RENAME combat_SelectHitReaction picks reaction index by param and flags
+AAFV 0x06025b90 combat_ClampDamageParam RENAME combat_FilterReactionMotion swaps motion param on match
+AAFV 0x06025bb0 combat_ScanArmorBreakBits RENAME armor_AccumulateHitDamage accumulates damage per armor bit
+AAFV 0x06025e4c armor_BreakArmorPiece CONFIRM armor_BreakArmorPiece sets break flags
+AAFV 0x06025f0c armor_UpdateBrokenFlags CONFIRM armor_UpdateBrokenFlags flags from hp
+AAFV 0x06025f50 armor_ApplyPendingBreakMask CONFIRM armor_ApplyPendingBreakMask ors mask
+AAFV 0x06025f88 armor_FindNextPart CONFIRM armor_FindNextPart walks mask fields
+AAFV 0x06025fe8 armor_FindActivePart CONFIRM armor_FindActivePart first nonzero slot
+AAFV 0x06026000 armor_BuildPartMask CONFIRM armor_BuildPartMask mask from flag bits
+AAFV 0x06026038 fighter_LoadMaxHealth RENAME armor_LoadFullPartMask +0x56 is armor part mask from char table
+AAFV 0x06026480 mode_ClearScrollFlagsAndInit UNSURE mode_ClearScrollFlagsAndInit weak evidence
+AAFV 0x060264f4 vdp2_ClearLayerBits UNSURE vdp2_ClearLayerBits weak evidence
+AAFV 0x06026520 fighter_ResetStateB RENAME fight_ResetBothFighters resets both fighter structs
+AAFV 0x0602660c game_ClearHalfwordFlag CONFIRM game_ClearHalfwordFlag writes zero
+AAFV 0x0602661c text_DecodeCharPairs CONFIRM text_DecodeCharPairs char pair decode
+AAFV 0x06026640 bitmap_TestBit CONFIRM bitmap_TestBit bit test
+AAFV 0x0602672c combat_SetHitSideFlags RENAME fight_PlaceFightersFromTable positions fighters from table
+AAFV 0x060267c4 mode_EnterAttractState5 RENAME mode_EnterState5 no attract evidence
+AAFV 0x060268ec mode_EnterState7 CONFIRM mode_EnterState7 sets mode 7
+AAFV 0x06026a04 mode_EnterState9 CONFIRM mode_EnterState9 sets mode 9
+AAFV 0x06026b50 mode_InitSelectScreenA CONFIRM mode_InitSelectScreenA select init
+AAFV 0x06026d60 mode_InitSelectScreenB CONFIRM mode_InitSelectScreenB select init
+AAFV 0x0602702c cd_WaitStatusLoop RENAME math_RandUntilFieldBelow8 loops random until field below 8
+AAFV 0x06027048 mode_CheckLoadResult RENAME mode_CheckReplayResult replay result handling
+AAFV 0x060273e8 mode_InitFightSetup CONFIRM mode_InitFightSetup fight setup
+AAFV 0x06027660 mode_CheckStartButton CONFIRM mode_CheckStartButton pad bit start
+AAFV 0x06027740 mode_EnterState2 CONFIRM mode_EnterState2 sets mode 2
+AAFV 0x060277ec fighter_RunScriptCallbacks CONFIRM fighter_RunScriptCallbacks script list callbacks
+AAFV 0x06027880 mode_QueueCommand3c CONFIRM mode_QueueCommand3c pushes id 0x3c
+AAFV 0x060278e8 script_RunHandlerList CONFIRM script_RunHandlerList indexed handlers
+AAFV 0x06027a08 cam_SmoothFollowTarget CONFIRM cam_SmoothFollowTarget yaw pitch follow
+AAFV 0x06027c30 cam_ClampTargetDistance RENAME cam_MeasureTargetDistance measures distance only
+AAFV 0x06027d2c fighter_RunScriptsIfFlagsClearA CONFIRM fighter_RunScriptsIfFlagsClearA flag guard
+AAFV 0x06027d90 fighter_RunScriptsIfFlagsClearB CONFIRM fighter_RunScriptsIfFlagsClearB flag guard
+AAFV 0x06027df4 fighter_RunScriptsIfFlagsClearC CONFIRM fighter_RunScriptsIfFlagsClearC flag guard
+AAFV 0x06027e58 script_RunHandlerListIfActive CONFIRM script_RunHandlerListIfActive guarded walk
+AAFV 0x06027ebe model_DrawPartTransformed CONFIRM model_DrawPartTransformed matrix draw
+AAFV 0x06027f58 model_SetScaleState CONFIRM model_SetScaleState scale tables
+AAFV 0x06027fd0 model_ScaleVertexGroups CONFIRM model_ScaleVertexGroups multiplies vertex groups
+AAFV 0x06028024 sys_InitSubsystemA RENAME sys_BootInitAndEnterMainLoop boot init then main loop
+AAFV 0x06028080 sys_CallWithParam11 RENAME dmac_CopyCh0AndWait dma copy and wait
+AAFV 0x06028504 cam_UpdateAndSetView CONFIRM cam_UpdateAndSetView camera update
+AAFV 0x06028c30 cam_InitZoomFromDistance CONFIRM cam_InitZoomFromDistance zoom init
+AAFV 0x06028df0 sys_ClearFlag CONFIRM sys_ClearFlag stores zero
+AAFV 0x06028dfc sys_InitBootHardware CONFIRM sys_InitBootHardware vdp dma init
+AAFV 0x06029378 game_ResetModeState CONFIRM game_ResetModeState resets mode state
+AAFV 0x0602948c vdp2_InitScrollPlanes CONFIRM vdp2_InitScrollPlanes scroll screens
+AAFV 0x06029748 vdp2_SetupBgLayersA CONFIRM vdp2_SetupBgLayersA bg layers
+AAFV 0x0602979c vdp2_SetupBgLayersB CONFIRM vdp2_SetupBgLayersB bg layers
+AAFV 0x060297f0 vdp2_SetLayerPriorities CONFIRM vdp2_SetLayerPriorities five index/value pairs for layers
+AAFV 0x06029820 counter_IncWrap3 CONFIRM counter_IncWrap3 wraps at 3
+AAFV 0x06029840 gfx_Rgb555Halve CONFIRM gfx_Rgb555Halve halves channels
+AAFV 0x0602986c gfx_Rgb555StepToward CONFIRM gfx_Rgb555StepToward steps channels to target
+AAFV 0x060298d6 vdp2_LoadPaletteBlocks UNSURE vdp2_LoadPaletteBlocks stores helper results to two globals unclear
+AAFV 0x06029920 ui_DrawBoxA CONFIRM ui_DrawBoxA geometry then table draw
+AAFV 0x06029950 ui_DrawBoxB CONFIRM ui_DrawBoxB geometry then table draw
+AAFV 0x06029980 ui_DrawBoxC CONFIRM ui_DrawBoxC variant of B
+AAFV 0x060299ac ui_DrawBoxD CONFIRM ui_DrawBoxD geometry then table draw
+AAFV 0x060299dc ui_DrawBoxE CONFIRM ui_DrawBoxE variant of D
+AAFV 0x06029a08 vdp2_ResetScreenParams RENAME cd_InitCdcAndReadHirq calls cdc init and hirq read
+AAFV 0x06029a38 sound_SendCommandPacket RENAME cd_PlayDiscTrackClamped builds packet and calls cdc play with clamped track
+AAFV 0x06029ab0 cd_SendCommand3Packet CONFIRM cd_SendCommand3Packet packet type 3 via cdc play
+AAFV 0x06029ad4 cd_SendCommand3 CONFIRM cd_SendCommand3 packet id 3 via seek
+AAFV 0x06029af0 cd_SendCommand0 CONFIRM cd_SendCommand0 packet id 0 via seek
+AAFV 0x06029b0c cd_GetStatusLow5 CONFIRM cd_GetStatusLow5 low five status bits
+AAFV 0x06029ba8 vdp2_InitScreenMode RENAME cd_InitCdcAndDirRead cdc init, dir read, clears bank and stage ids
+AAFV 0x06029c38 gfs_OpenAndWait CONFIRM gfs_OpenAndWait open read wait loop
+AAFV 0x06029d0c task_InitFileLoadEntry CONFIRM task_InitFileLoadEntry open and read params
+AAFV 0x06029dd0 gfs_GetEntryHandleStatus RENAME gfs_ClearEntrySections wraps clear-sections on entry handle
+AAFV 0x06029de4 task_DispatchEntryByType CONFIRM task_DispatchEntryByType jump table on type
+AAFV 0x06029ea4 gfs_ReadEntryAndWait CONFIRM gfs_ReadEntryAndWait read wait retry
+AAFV 0x06029f50 task_EntryPlaySoundIndex RENAME task_EntryDrawResultsPanels passes byte to results panel draw
+AAFV 0x06029f74 task_EntryLoadAndPlaySound RENAME task_EntryCopyAndDrawResultsPanels dma copy then results panel draw
+AAFV 0x0602a01c task_CallHandlerByMode RENAME data_BuildTableOffsetsByMode picks P1 or P2 table offset builder
+AAFV 0x0602a1a8 task_EntryLoadWithStackBuffer CONFIRM task_EntryLoadWithStackBuffer dma then lz decode on stack buffer
+AAFV 0x0602a208 task_EntryCallWithFields RENAME task_EntryDmaCopy dma copy ch0 and wait
+AAFV 0x0602a22c task_RunEntryList CONFIRM task_RunEntryList walks 0x40 entries with callbacks
+AAFV 0x0602a2bc task_CallHelperZero RENAME task_RunEntryListThunk calls RunEntryList with 0
+AAFV 0x0602a3a6 task_InitEntryFromTableA CONFIRM task_InitEntryFromTableA fills entry and bumps count
+AAFV 0x0602a3d4 task_InitWinPoseEntry RENAME task_InitPoGraFileEntry entry points into PO_GRA01 file table
+AAFV 0x0602ac9c task_SetCallbacksA CONFIRM task_SetCallbacksA stores two callbacks
+AAFV 0x0602acb4 task_SetCallbacksB CONFIRM task_SetCallbacksB stores two callbacks
+AAFV 0x0602accc task_SetCallbacksC CONFIRM task_SetCallbacksC stores two callbacks
+AAFV 0x0602ace4 task_SetCallbacksD CONFIRM task_SetCallbacksD stores two callbacks
+AAFV 0x0602acfc task_InitEntryTable CONFIRM task_InitEntryTable resets count and list pointer
+AAFV 0x0602ad68 task_PollLoadDone CONFIRM task_PollLoadDone state 1 to 2
+AAFV 0x0602ad90 task_WaitLoadDoneAndCallback CONFIRM task_WaitLoadDoneAndCallback busy wait then callback
+AAFV 0x0602addc input_ClearPadState UNSURE input_ClearPadState four words set to -1 purpose unclear
+AAFV 0x0602adf0 vdp2_SetColorPairsAndUpdate RENAME fighter_SetSelectionAndLoadAssets stores chars and variants then loads model texture
+AAFV 0x0602af18 util_GetByteAtOffset0B CONFIRM util_GetByteAtOffset0B returns byte 0xb and 3
+AAFV 0x0602af42 cd_LoadMGRA_Model CONFIRM cd_LoadMGRA_Model model file load
+AAFV 0x0602afbc cd_LoadTGRA_Texture CONFIRM cd_LoadTGRA_Texture texture file load
+AAFV 0x0602b064 cd_LoadSndDrv CONFIRM cd_LoadSndDrv sound driver load
+AAFV 0x0602b0ac cd_LoadSeGame CONFIRM cd_LoadSeGame effects bank load
+AAFV 0x0602b0e0 cd_LoadCharSound CONFIRM cd_LoadCharSound per-fighter bank
+AAFV 0x0602b130 cd_LoadStageSound CONFIRM cd_LoadStageSound stage bank by index
+AAFV 0x0602b190 cd_LoadSeEnd CONFIRM cd_LoadSeEnd SE_END load
+AAFV 0x0602b1c4 sound_ClearLoadedBankIds CONFIRM sound_ClearLoadedBankIds six bytes to 0xff
+AAFV 0x0602b210 sound_SetLoadedBankId CONFIRM sound_SetLoadedBankId slot set and invalidate
+AAFV 0x0602b264 input_UpdatePlayerSelection RENAME fighter_ApplySelectionChange stores selection and runs per-side handlers
+AAFV 0x0602b334 cd_LoadMotCom CONFIRM cd_LoadMotCom MOT_COM load
+AAFV 0x0602b358 cd_LoadMotionFighterA CONFIRM cd_LoadMotionFighterA per-fighter motion
+AAFV 0x0602b38c cd_LoadMotionFighterB CONFIRM cd_LoadMotionFighterB per-fighter motion
+AAFV 0x0602b3c0 cd_LoadFileFixedA RENAME mem_SwapWordsFixedArgs thunk to swap words with fixed args
+AAFV 0x0602b3e4 cd_LoadFileFixedAndRun RENAME dmac_CopyFixedAndWait dma copy fixed args then wait
+AAFV 0x0602b414 cd_LoadFileFixedAndRunB RENAME dmac_CopyFixedAndWaitB dma copy other fixed args then wait
+AAFV 0x0602b444 stage_ClearIdWords UNSURE stage_ClearIdWords four words -1 purpose unclear
+AAFV 0x0602b458 cd_LoadStageBanStg CONFIRM cd_LoadStageBanStg file entry by index
+AAFV 0x0602b498 cd_LoadTitleBin CONFIRM cd_LoadTitleBin title load
+AAFV 0x0602b514 cd_LoadSeleoptBin CONFIRM cd_LoadSeleoptBin option select load
+AAFV 0x0602b560 cd_LoadEnDataBin CONFIRM cd_LoadEnDataBin loads EN_DATA.BIN then palette copies
+AAFV 0x0602b5f0 cd_LoadGameboxBin CONFIRM cd_LoadGameboxBin single file open
+AAFV 0x0602b660 cd_LoadTrainingBin CONFIRM cd_LoadTrainingBin single file open
+AAFV 0x0602b698 cd_LoadTeamBin CONFIRM cd_LoadTeamBin single file open, caller team init
+AAFV 0x0602b6d0 cd_LoadNameEntBin CONFIRM cd_LoadNameEntBin single file open
+AAFV 0x0602b708 cd_LoadAdvRankBin CONFIRM cd_LoadAdvRankBin single file open
+AAFV 0x0602b740 cd_LoadEfcDataBin CONFIRM cd_LoadEfcDataBin file open plus follow-up
+AAFV 0x0602b780 cd_LoadBackupBin CONFIRM cd_LoadBackupBin file open to arg address
+AAFV 0x0602b7ec cd_LoadSeleprogBin CONFIRM cd_LoadSeleprogBin single file open
+AAFV 0x0602b810 util_CallIndirectPointer CONFIRM util_CallIndirectPointer calls ptr in global
+AAFV 0x0602b828 gfs_WaitForSectors CONFIRM gfs_WaitForSectors polls transfer state
+AAFV 0x0602b88c util_CallHelperNoArgs RENAME game_SetGlobalDefaultWrap pure wrapper of game_SetGlobalDefault
+AAFV 0x0602b8a0 gfs_PollOpenStatus CONFIRM gfs_PollOpenStatus gets file status, -0x17 busy
+AAFV 0x0602b8d8 cd_LoadWgraceBin CONFIRM cd_LoadWgraceBin indexed file name stride 0x14
+AAFV 0x0602b914 cd_LoadHeliBin CONFIRM cd_LoadHeliBin single file open
+AAFV 0x0602b938 cd_LoadRepDataBinA CONFIRM cd_LoadRepDataBinA single file open
+AAFV 0x0602b95c cd_LoadRepDataBinB CONFIRM cd_LoadRepDataBinB same file via other fn ptr
+AAFV 0x0602ba04 cd_LoadEndMaskBin CONFIRM cd_LoadEndMaskBin single file open
+AAFV 0x0602ba28 cd_LoadPoGra01Bin CONFIRM cd_LoadPoGra01Bin single file open
+AAFV 0x0602ba4c cd_LoadOver00Bin CONFIRM cd_LoadOver00Bin single file open
+AAFV 0x0602ba70 cd_LoadStaffBin CONFIRM cd_LoadStaffBin indexed file name
+AAFV 0x0602baa0 cd_LoadWinPoseFile CONFIRM cd_LoadWinPoseFile indexed PO_GRA01 name
+AAFV 0x0602bb18 pad_UpdateEdgeStates_2 RENAME pad_UpdateEdgeStatesBoth drop numeric suffix, two pads
+AAFV 0x0602bbd0 pad_InitRepeatState CONFIRM pad_InitRepeatState zeros state, sets 0x18/8
+AAFV 0x0602bc34 pad_SetRepeatThresholds CONFIRM pad_SetRepeatThresholds init then store params
+AAFV 0x0602bc68 pad_ClearAndUpdateButtons CONFIRM pad_ClearAndUpdateButtons clear then repeat update
+AAFV 0x0602bcc0 pad_UpdateAutoRepeat CONFIRM pad_UpdateAutoRepeat hold counters, repeat bits
+AAFV 0x0602bd80 util_ClearWords16 CONFIRM util_ClearWords16 zero 16 words
+AAFV 0x0602bdd4 menu_DispatchByIndex CONFIRM menu_DispatchByIndex jump table, caller scenes
+AAFV 0x0602bfb0 queue_Reset CONFIRM queue_Reset clears queue count and sets flag
+AAFV 0x0602bfc8 queue_PushByte CONFIRM queue_PushByte append byte
+AAFV 0x0602bff0 queue_PopByteAndDispatch CONFIRM queue_PopByteAndDispatch pop byte, set or clear flags
+AAFV 0x0602c034 ui_ShowSelectorOn UNSURE ui_ShowSelectorOn pushes 1 and sets flags, meaning unclear
+AAFV 0x0602c050 ui_ShowSelectorOff UNSURE ui_ShowSelectorOff pushes 0 and clears flags, meaning unclear
+AAFV 0x0602c06c ui_SetValueAndRefresh RENAME vdp2_SetE0MaskFromArg stores arg then calls E0 mask setter
+AAFV 0x0602c094 ui_CallWithGlobalValue RENAME vdp2_SetE0MaskFromGlobal passes global to E0 mask setter
+AAFV 0x0602c0b0 ui_SelectTableByStatusBit RENAME game_PickRandomTableEntry random bit picks one of two globals
+AAFV 0x0602c0ec util_CallHelperShortArg RENAME cd_LoadStageBanStgWrap wrapper of cd_LoadStageBanStg
+AAFV 0x0602c100 ui_DrawResultsScreenPanels UNSURE ui_DrawResultsScreenPanels large body not fully verified
+AAFV 0x0602c840 vdp2_SetLayerEnableAll RENAME vdp2_InitShadowNibbles sets shadow reg nibbles 1A4/1A6/CE
+AAFV 0x0602c898 lz_InitDecodeState RENAME gzip_InitDecodeState inits then parses gzip header and trailer
+AAFV 0x0602c908 gzip_ParseHeader CONFIRM gzip_ParseHeader magic 1f8b, method 8
+AAFV 0x0602ca40 gzip_ReadTrailer CONFIRM gzip_ReadTrailer crc and size
+AAFV 0x0602cac4 lz_AdvanceWindowPointers RENAME inflate_AdvanceWindow inflate callers, window rotate
+AAFV 0x0602cb74 inflate_BuildHuffmanTable CONFIRM inflate_BuildHuffmanTable huft_build style
+AAFV 0x0602d28e inflate_CodesBlock CONFIRM inflate_CodesBlock huffman decode and copy
+AAFV 0x0602d650 inflate_StoredBlock CONFIRM inflate_StoredBlock len/nlen raw copy
+AAFV 0x0602d778 inflate_FixedBlock CONFIRM inflate_FixedBlock fixed tables
+AAFV 0x0602d910 inflate_DynamicBlock CONFIRM inflate_DynamicBlock HLIT/HDIST/HCLEN
+AAFV 0x0602df9c inflate_ReadBlockHeader CONFIRM inflate_ReadBlockHeader type dispatch
+AAFV 0x0602e068 inflate_RunAllBlocks CONFIRM inflate_RunAllBlocks loop until final
+AAFV 0x0602e0e0 vdp2_InitScrollRegisters CONFIRM vdp2_InitScrollRegisters scroll register init
+AAFV 0x0602e3c4 vdp2_SetPlaneAddresses CONFIRM vdp2_SetPlaneAddresses plane address regs
+AAFV 0x0602e508 vdp2_InitScrollPositions CONFIRM vdp2_InitScrollPositions scroll positions
+AAFV 0x0602e5ec menu_DrawOptionHeader CONFIRM menu_DrawOptionHeader option frame, caller option screen
+AAFV 0x0602e954 menu_DrawOptionLabels CONFIRM menu_DrawOptionLabels option labels
+AAFV 0x0602ea70 vdp2_SetLayerFromIndex RENAME hud_DrawBothLifeBars calls hud_DrawLifeBarLeft/Right per player
+AAFV 0x0602eaa0 menu_SmoothPlayerGauges RENAME hud_SmoothLifeGauges eases life values, draws life bars
+AAFV 0x0602eb8c menu_QueueGaugeInit RENAME hud_InitGaugeBlocks per-player life value into vram block setup
+AAFV 0x0602ebcc menu_DrawSelectionMarkers CONFIRM menu_DrawSelectionMarkers cursor markers per player
+AAFV 0x0602ecd0 menu_UpdateCursorSlots CONFIRM menu_UpdateCursorSlots cursor slot conflicts
+AAFV 0x0602f002 menu_StepBlinkPlayerA CONFIRM menu_StepBlinkPlayerA blink step
+AAFV 0x0602f116 menu_StepBlinkPlayerB CONFIRM menu_StepBlinkPlayerB blink step second column
+AAFV 0x0602f22c hud_DrawTimeDigits CONFIRM hud_DrawTimeDigits two digit sprites
+AAFV 0x0602f464 hud_DrawSingleSprite CONFIRM hud_DrawSingleSprite one sprite at fixed pos
+AAFV 0x0602f494 vdp2_WriteScreenRegisters CONFIRM vdp2_WriteScreenRegisters register write sequence
+AAFV 0x0602f5e8 hud_DrawLifeBarLeft CONFIRM hud_DrawLifeBarLeft left life bar segments
+AAFV 0x0602f708 hud_DrawLifeBarRight CONFIRM hud_DrawLifeBarRight right life bar segments
+AAFV 0x0602f818 hud_CompareGaugeProducts RENAME round_CompareLifeRatios cross-multiply compare, caller round_JudgeWinner
+AAFV 0x0602f888 menu_DrawScreenHeader CONFIRM menu_DrawScreenHeader draws header sprite
+AAFV 0x0602f8f4 menu_DrawNumberAt CONFIRM menu_DrawNumberAt prints number at fixed pos
+AAFV 0x0602f940 menu_DrawTableGetValue UNSURE menu_DrawTableGetValue draw then return value, purpose unclear
+AAFV 0x0602f96c menu_TriggerOnce CONFIRM menu_TriggerOnce one-shot state trigger
+AAFV 0x0602f9a4 menu_ClearStateCall CONFIRM menu_ClearStateCall clears state then reset
+AAFV 0x0602f9c0 menu_InitScreenState CONFIRM menu_InitScreenState sets state, clears globals
+AAFV 0x0602fa24 menu_RunSetupSequence RENAME menu_DrawSpritePair two sprites at 8,1 and 0x31,1
+AAFV 0x0602fa78 menu_ResetAndInit CONFIRM menu_ResetAndInit clears state, setup, queries
+AAFV 0x0602fad8 menu_UpdateMainSelect CONFIRM menu_UpdateMainSelect timer-driven main select update
+AAFV 0x0602fe9c menu_UpdateSubSelect CONFIRM menu_UpdateSubSelect cursor movement via pad bits
+AAFV 0x06030580 menu_SetupLayers CONFIRM menu_SetupLayers layer and shadow setup
+AAFV 0x06030610 pad_QueryPortA RENAME math_BitMaskFromIndex computes 1 << arg, not a pad query
+AAFV 0x06030628 pad_QueryPortConst RENAME math_ShiftConstLeft const << arg, not a pad query
+AAFV 0x06030644 pad_QueryBit RENAME math_TestBit (a>>b)&1
+AAFV 0x06030658 menu_ProcessInputState UNSURE menu_ProcessInputState input state machine, purpose unclear
+AAFV 0x060307f0 menu_InitAndRefresh RENAME bram_InitBackupModule loads BACKUP.BIN, header build, flag
+AAFV 0x06030830 menu_CallHelperSeq RENAME mem_CopyAndClearBuffers DMA copy then zero 16 words
+AAFV 0x0603088c menu_SetModeParams RENAME bram_CallWithSmpcBracket SMPC cmds 0xc/0xb around indirect call
+AAFV 0x060308c8 menu_HandleSelection UNSURE menu_HandleSelection backup ram handler, exact role unclear
+AAFV 0x06030a80 menu_HandleCursorMove UNSURE menu_HandleCursorMove backup ram handler, exact role unclear
+AAFV 0x06030bac menu_DrawItemPair UNSURE menu_DrawItemPair smpc bracket vtable call, role unclear
+AAFV 0x06030c04 menu_DrawItemList UNSURE menu_DrawItemList backup ram list, role unclear
+AAFV 0x06030cd8 menu_ComputeIndex UNSURE menu_ComputeIndex vtable call with buffer, role unclear
+AAFV 0x06030dd4 menu_CheckFlagsCallA UNSURE menu_CheckFlagsCallA guarded call, role unclear
+AAFV 0x06030e18 menu_CheckFlagsCallB UNSURE menu_CheckFlagsCallB guarded call, role unclear
+AAFV 0x06030e70 menu_CallWithTableEntry UNSURE menu_CallWithTableEntry role unclear
+AAFV 0x06030eb8 menu_StartTimerA UNSURE menu_StartTimerA status byte set, not timer evidence
+AAFV 0x06030f30 menu_StartTimerB UNSURE menu_StartTimerB status byte set, not timer evidence
+AAFV 0x06030f7c menu_StartTimerC UNSURE menu_StartTimerC status byte set, not timer evidence
+AAFV 0x06030fd0 menu_UpdateItemStruct RENAME bram_StampSaveTime reads SMPC BCD time into record
+AAFV 0x06031100 menu_ProcessItemPtr UNSURE menu_ProcessItemPtr vtable call in smpc bracket, role unclear
+AAFV 0x060311b8 menu_LookupItem UNSURE menu_LookupItem role unclear
+AAFV 0x060312d4 menu_BuildItemRecord UNSURE menu_BuildItemRecord role unclear
+AAFV 0x06031338 menu_ApplyItemPtr UNSURE menu_ApplyItemPtr vtable call, role unclear
+AAFV 0x06031390 menu_ApplyItemArg UNSURE menu_ApplyItemArg vtable call, role unclear
+AAFV 0x06031434 menu_CallSequenceB RENAME bram_BuildMasterHeader copies FVIPER_MAST and FV_data names
+AAFV 0x060314a4 bram_BuildEntryName CONFIRM bram_BuildEntryName builds entry name header
+AAFV 0x06031540 bram_BuildEntryNameB RENAME bram_BuildReplayEntry builds backup RAM entry from prefix string
+AAFV 0x060315f4 menu_SetGlobalPair RENAME bram_BuildFixedEntry fills entry with fixed name and comment strings
+AAFV 0x06031678 menu_CallPairHelper RENAME bram_BuildNamedEntry fills entry with name arg and comment string
+AAFV 0x060316ec bram_ReadEntryFields RENAME bram_SetEntryNumberSuffix converts number to digits and copies two chars into entry
+AAFV 0x06031728 bram_CompareFvDataName RENAME bram_CopyFvDataName body copies, no compare
+AAFV 0x06031740 bram_ProcessSaveHeader RENAME bram_BuildDateStamp RTC month/day text into entry
+AAFV 0x06031828 bram_ReadBlock RENAME str_UintToHex5 number to hex digit string, no read
+AAFV 0x060318a4 bram_WriteBlock RENAME str_UintToDec5 number to 5 decimal digits, no write
+AAFV 0x06031a0c bram_CheckSaveSlot RENAME bram_QueryDeviceInfo vtable call stores 3 results, error if free blocks below 1
+AAFV 0x06031a94 bram_LoadEntry UNSURE bram_LoadEntry builds name from number then pair helper then update; purpose unclear
+AAFV 0x06031b1c bram_GetFreeBlocks UNSURE bram_GetFreeBlocks body does not clearly compute free blocks
+AAFV 0x06031b8c bram_CheckSpaceAndFlag CONFIRM bram_CheckSpaceAndFlag helpers then tests global below 1
+AAFV 0x06031be8 bram_StepFileOp CONFIRM bram_StepFileOp state step with status return
+AAFV 0x06031f8a bram_SelectErrorCode RENAME bram_PlayResultSound queues sound command with one of two constants
+AAFV 0x06031fb8 bram_CompareIncCounter CONFIRM bram_CompareIncCounter post-increment and compare
+AAFV 0x06031fd0 bram_RunFileOp RENAME bram_DrawStatusText draws two text lines indexed by counter
+AAFV 0x06032114 bram_CallSequenceC RENAME menu_RefreshListEntries frees entries and run lists in loops, no backup op
+AAFV 0x06032568 menu_MainUpdate CONFIRM menu_MainUpdate large cursor and draw update
+AAFV 0x0603314c menu_ResetStateTable RENAME menu_PrepareScreenEnter two helpers, clears byte, sets 0x40; no table
+AAFV 0x060331a4 menu_ClearThreeGlobals CONFIRM menu_ClearThreeGlobals zeroes two and sets third
+AAFV 0x060333bc menu_UpdateOptionsA CONFIRM menu_UpdateOptionsA pad-driven option update
+AAFV 0x06033622 menu_UpdateOptionsB RENAME menu_DrawOptionRows 17-row loop with jump table dispatch
+AAFV 0x06033a0c menu_InitOptionsState CONFIRM menu_InitOptionsState clears option globals
+AAFV 0x06033b04 menu_UpdateSoundTest RENAME menu_UpdateSecretCodeInput matches pad sequence entries then cue and flag
+AAFV 0x06034290 menu_GetTableShort RENAME menu_StepScrollAnimA adds to scroll value, counts to 8, resets mode
+AAFV 0x060342dc menu_GetTableShortB RENAME menu_StepScrollAnimB twin of scroll step on second value
+AAFV 0x06034328 vdp_SetupWindow RENAME vdp_SetupScreenLayers frees resources, sets window, dispatches layers 1-3
+AAFV 0x06034404 menu_ComputeValueFromByte RENAME menu_RankRecordsForPlayer builds sort keys, sorts, copies, assigns ranks
+AAFV 0x060344a8 menu_CopyGlobalPair RENAME menu_CopyRecordsBySortOrder copies 12-byte records in sorted order
+AAFV 0x06034534 menu_ComputeValue2 RENAME menu_AssignRecordRanks assigns rank per sorted record
+AAFV 0x060345a0 menu_CallWithCharArg RENAME menu_FormatDigitSeries 6-iteration loop over digit strings
+AAFV 0x060345e0 menu_ClearAndFill RENAME menu_RebuildSortedKeys resets keys then rebuilds
+AAFV 0x0603460c menu_FormatDigitChar RENAME menu_FormatTwoDigitText splits number into two digit chars
+AAFV 0x06034658 menu_DrawTileRow RENAME menu_DrawTimeTiles writes time digit tiles to buffer
+AAFV 0x060346bc menu_DrawByteString RENAME menu_FormatTimeDigits min/sec/centisec digits with separators
+AAFV 0x060347a4 menu_DrawTextFields RENAME menu_SplitTimeFields splits time value into three fields
+AAFV 0x0603484c menu_SelectPlayerByte CONFIRM menu_SelectPlayerByte picks one of two byte globals by flag
+AAFV 0x06034884 menu_UpdateCharArg RENAME menu_BuildSortKeys builds per-record sort keys
+AAFV 0x06034948 menu_LoopFromOne RENAME menu_InsertionSortInts verified insertion sort over int array
+AAFV 0x06034af8 menu_UpdateNoArgB RENAME menu_InitSelectionLists init of selection lists and entries
+AAFV 0x060350f8 menu_DrawTableSet UNSURE menu_DrawTableSet draws three tables; role unclear
+AAFV 0x060352a0 menu_InitScreenSeq CONFIRM menu_InitScreenSeq sequence of init helper calls
+AAFV 0x0603581c menu_UpdateNoArgC RENAME menu_DrawTwoChoiceLabels draws two choice labels
+AAFV 0x060358d6 menu_UpdateNoArgD UNSURE menu_UpdateNoArgD mixed draw and state update; role unclear
+AAFV 0x06035bd4 menu_UpdateThreeArg RENAME menu_TallyMatchTotals tallies per-round totals into arrays and draws
+AAFV 0x06036214 menu_UpdateShortArg RENAME menu_DrawRankingList draws ranked list rows
+AAFV 0x060364a6 menu_DrawShortArgs RENAME menu_DrawTimeText draws time text with tile and string calls
+AAFV 0x0603678c menu_DispatchByIndex_2 RENAME menu_DispatchByIndexAlt jump table when low byte below 4; suffix not allowed
+AAFV 0x06036804 menu_CallHelperArg3 CONFIRM menu_CallHelperArg3 tail call with constant 3
+AAFV 0x06036818 menu_CheckTwoFlags UNSURE menu_CheckTwoFlags flag tests plus mode reset and state code; mixed
+AAFV 0x060368bc menu_InitSeq CONFIRM menu_InitSeq init helpers then halfword pointer use
+AAFV 0x060369fc menu_UpdateCharCtl RENAME menu_LoadCharBackground LZ decode and DMA with char flag branch
+AAFV 0x06036adc menu_UpdateHalfwords RENAME menu_FadePaletteStep steps rgb555 toward target then DMA
+AAFV 0x06036b44 menu_UpdateHalfwordsB RENAME menu_InitLinkedFreeList builds 128-node free list and zeroes slot maps
+AAFV 0x06036c28 menu_CallFiveArgs RENAME vdp2_SetFiveScrollParams stores 5 args and classifies each by range
+AAFV 0x06036cc8 menu_DispatchByStackIndex CONFIRM menu_DispatchByStackIndex jump table when index below 5
+AAFV 0x06036d2c menu_StoreFiveParams RENAME vdp2_StoreFiveAddrParams stores 5 ints and their >>5 shorts
+AAFV 0x06036ddc menu_HaltIfZero RENAME list_PopFreeNode pops free-list head, hangs if empty
+AAFV 0x06036dfc list_InitNode RENAME list_PushFreeNode zeroes node and pushes onto free list
+AAFV 0x06036e24 list_SetSlot RENAME list_AppendToSlot appends node at slot head/tail pointers
+AAFV 0x06036e68 list_AddEntry RENAME list_InsertSplitNode new node after parent at offset+size
+AAFV 0x06036ea0 list_ProcessHalfwords RENAME vram_AllocRunAndCopy finds free run in usage map and DMA copies block
+AAFV 0x06036fac list_UpdateEntry RENAME vram_FreeRun clears usage map run and decrements slot count
+AAFV 0x06037014 list_FindByIndex RENAME vram_ClearSlotGroup clears usage map entries for slot group
+AAFV 0x0603707c vram_CopyTileBlock CONFIRM vram_CopyTileBlock DMA copy to row of table by indices
+AAFV 0x060370e0 vram_PutHalfword CONFIRM vram_PutHalfword writes halfword at row/column
+AAFV 0x06037108 vram_UpdateFromPtr RENAME vram_AllocEntryList allocs each entry until zero, stores handle at +6
+AAFV 0x06037168 vram_LookupEntryHelper RENAME vram_AllocEntry allocs one entry and stores handle at +6
+AAFV 0x060371a8 vram_AllocBlock CONFIRM vram_AllocBlock first-fit allocator with optional LZ decode and DMA
+AAFV 0x06037328 vram_FreeLoop RENAME vram_FreeEntryList frees each entry until zero
+AAFV 0x06037380 vram_QueryEntryFields RENAME vram_FreeEntry frees entry handle via block free
+AAFV 0x060373b4 vram_ManageBlocks RENAME vram_FreeBlock marks node free and coalesces neighbours
+AAFV 0x06037510 vram_FindFree RENAME vram_ResetSlotList releases all nodes of a slot list
+AAFV 0x060375dc vram_CheckBounds RENAME vram_SetTileCoords splits coords by 0x40, sets position, jump table by mode
+AAFV 0x060376f8 vram_GetPtrAtIndex CONFIRM vram_GetPtrAtIndex returns pointer from table by index
+AAFV 0x06037706 vram_UpdateFromGlobal RENAME vram_BlitDecodedTileRowA LZ decode if flagged then blit row
+AAFV 0x0603776c vram_CallTwoStage RENAME vram_DrawIndexedTileRowA gets ptr by index then blits row
+AAFV 0x060377a0 vram_UpdateFromGlobalB RENAME vram_BlitDecodedTileRowB LZ decode if flagged then blit row variant
+AAFV 0x060377fc vram_CallTwoStageB RENAME vram_DrawIndexedTileRowB gets ptr by index then blits row variant
+AAFV 0x06037824 vram_ReadGlobalDefault RENAME vram_DrawDefaultTileRow inits sprite entry then blits fixed data
+AAFV 0x06037870 vram_CallTwoStageC RENAME vram_DrawIndexedTileRowC gets ptr by index then default row draw
+AAFV 0x060378b4 vram_CallTwoStageD RENAME vram_DrawIndexedString gets ptr by index then string/sprite draw
+AAFV 0x06037900 vram_AllocTexture RENAME str_FormatFixedPoint number to decimal text with sign and point
+AAFV 0x06037ac8 vram_ProcessRect RENAME vram_CopyTileMapRect copies rect of tile words adding offset and palette bits
+AAFV 0x06037b48 vram_InitAndRead RENAME vram_InitAndLoadDefaults init free list, alloc base block and palette run
+AAFV 0x06037b8c vram_SetupBlock RENAME vram_DrawStringAtPos sets coords then string draw
+AAFV 0x06037c60 vram_SetupBlockB RENAME vram_DrawTileRowAtPos sets coords then default row draw
+AAFV 0x06037cc0 vram_ReleaseBlock RENAME vram_CopyEntryListToVram loop DMA copy of scaled entry data
+AAFV 0x06037d4c vram_CallConstArgs RENAME vram_DmaCopyEffectData DMA copy of loaded effect data buffer
+AAFV 0x06037d90 vram_UpdateHalfwordGlobals RENAME vram_LoadBlitFree allocs block and palette, draws, frees both
+AAFV 0x06037e28 menu_InitSeqB CONFIRM menu_InitSeqB init sequence of mode and scroll helpers
+AAFV 0x060381d4 menu_InitSpritePositions RENAME menu_FreeScreenResources frees entries and runs in loops
+AAFV 0x06038284 menu_DrawFiveRows CONFIRM menu_DrawFiveRows five rows plus cursor row
+AAFV 0x060388cc menu_UpdateOptionScreen CONFIRM menu_UpdateOptionScreen large pad-driven option screen
+AAFV 0x0603944c menu_InitOptionTransition CONFIRM menu_InitOptionTransition init sequence then flags set
+AAFV 0x060394e4 menu_FindNextValidItem CONFIRM menu_FindNextValidItem steps selection with wrap until valid
+AAFV 0x06039560 menu_UpdateItemCursor CONFIRM menu_UpdateItemCursor moves item index on pad bits with wrap
+AAFV 0x0603970c math_BuildSinTable RENAME gfx_BuildGradientByteTable piecewise linear 256-byte curve from 9 params, no sine
+AAFV 0x06039880 math_BuildColorTable RENAME gfx_BuildGradientColorTable same params as byte table, RGB555 clamped 0..31
+AAFV 0x06039a50 mem_CopyGlobalBlock RENAME gfx_BuildGradientTablesGlobal just calls both table builders on a global buffer, no copy
+AAFV 0x0603a184 menu_DrawTimeDisplay CONFIRM two-digit capped 99 with 59 cap field, timer style
+AAFV 0x0603a318 menu_DrawDigitByIndex CONFIRM prints one glyph by index via byte table
+AAFV 0x0603a35c math_SplitSeconds CONFIRM reciprocal divides into min/sec/centisec fields, used by ranking
+AAFV 0x0603a934 menu_DrawRankingTable CONFIRM five rows rank names times via SplitSeconds
+AAFV 0x0603ab70 menu_DrawNameEntry CONFIRM three chars plus cursor blink
+AAFV 0x0603acbc menu_DrawNumberWithDivide UNSURE prints value and scaled quotient at fixed spot, purpose unclear
+AAFV 0x0603ad64 gfx_DrawSpinningRingSprites UNSURE sin/cos placed sprites row with fade, ring unproven
+AAFV 0x0603b1a8 scene_SetupCameraAndLight RENAME scene_SetupSpriteView clip window translate scale and object frame, no light
+AAFV 0x0603b21c scene_LoadPaletteA UNSURE DMA ch0 copy and wait, destination unproven
+AAFV 0x0603b248 scene_LoadPaletteB UNSURE twin DMA copy and wait
+AAFV 0x0603b274 sprite_SetObjectFrame CONFIRM writes frame word into object entry then updates
+AAFV 0x0603b2b4 menu_InitScreenA CONFIRM frees lists sets nine entries active, mode 5
+AAFV 0x0603b4dc menu_InitScreenB CONFIRM sets nine entry states 2 or 0
+AAFV 0x0603b830 menu_SoundTestInput CONFIRM pad edits two counters and sends sound command
+AAFV 0x0603ba3c menu_SetupTextWindow CONFIRM window setup and string draw
+AAFV 0x0603ba7c menu_ResetTextState CONFIRM resets text inits and redraws rows
+AAFV 0x0603bacc menu_DrawScrollRow CONFIRM DMA copies row at counter offset then draws string
+AAFV 0x0603bb28 menu_ResetCounters CONFIRM clears counters and sets mode
+AAFV 0x0603c11c menu_DrawResultsRows UNSURE prints five fields in a column, not clearly results
+AAFV 0x0603c814 menu_DrawSelectedEntry CONFIRM draws marker values and name of selected record
+AAFV 0x0603ce5c input_ClearButtonFlags CONFIRM zeroes pad flag bytes
+AAFV 0x0603deb0 replay_BuildEntryList UNSURE builds 0x28-byte named entries with dates, replay unproven
+AAFV 0x0603e1ec menu_DrawEntryListPage CONFIRM six visible rows with highlight and scroll text
+AAFV 0x0603e2fc menu_DrawEntryListFrame CONFIRM arrows by position and selected name
+AAFV 0x0603e490 pad_PollMenuInput CONFIRM derives press flags and up/down left/right counters
+AAFV 0x0603e59c color_BlendRgb555 CONFIRM per-channel lerp of two RGB555 colours
+AAFV 0x0603e9b4 entry_InitTable32 CONFIRM 32 entries of 0x28 bytes id byte plus copied name
+AAFV 0x0603ea18 menu_AdvanceSlotCounter CONFIRM counter clamped 2..5 then loads indexed set
+AAFV 0x0603eab4 gfx_ReleaseSlotsGroupA CONFIRM same helper over eight fixed slot ids
+AAFV 0x0603eb00 gfx_LoadMenuSetA CONFIRM sets vars releases slots loads menu resources
+AAFV 0x0603ec14 gfx_LoadMenuSetB CONFIRM same pattern variant
+AAFV 0x0603ed1c gfx_LoadMenuSetC CONFIRM same pattern variant
+AAFV 0x0603ee10 gfx_LoadMenuSetD CONFIRM same pattern variant
+AAFV 0x0603eef0 menu_EnterModeA CONFIRM picks load set by flag then sets mode and flags
+AAFV 0x0603ef88 menu_DispatchStateTable CONFIRM calls handler from state table, frame counter mod 32
+AAFV 0x0603f058 menu_DrawTwoCounters CONFIRM prints two counters at fixed cursor
+AAFV 0x0603f5f4 menu_ToggleFlagStart CONFIRM flag test starts timer or sets flag
+AAFV 0x0603f630 gfx_LoadResource20 CONFIRM loads id 0x20 stores result
+AAFV 0x0603f664 gfx_DrawBlankPanel20 CONFIRM draws zero panel and loads 0x20
+AAFV 0x0603f6b0 gfx_LoadResource21 CONFIRM loads id 0x21 stores result
+AAFV 0x0603f6e4 gfx_DrawBlankPanel21 CONFIRM draws zero panel and loads 0x21
+AAFV 0x0603f7a6 table_SelectEntryA RENAME sound_QueueTableCommandA picks table row then queues sound command by index
+AAFV 0x0603f7dc table_SelectEntryB RENAME sound_QueueTableCommandB twin with other table
+AAFV 0x0603f814 gfx_CallHelperDup3 RENAME sound_SendPacketDefault wraps sound packet send with arg twice and 0xf
+AAFV 0x0603f828 sound_PlayCueWrapA CONFIRM wraps index 0..5 plays cue
+AAFV 0x0603f888 sound_PlayCueWrapB CONFIRM wraps index 0..10 plays cue
+AAFV 0x0603f8e8 gfx_DrawIndexedSpriteA RENAME gfx_CopyIndexedTileBlockA calls tile block copy, not sprite draw
+AAFV 0x0603f938 gfx_DrawIndexedSpriteB RENAME gfx_CopyIndexedTileBlockB twin
+AAFV 0x0603f988 gfx_FreeSlotsGroupB CONFIRM 13 slot ids then update call
+AAFV 0x0603fbbc menu_DrawCharacterPortraits CONFIRM loads portraits and icons then draws list
+AAFV 0x0603fe0c menu_DrawThreeStatValues CONFIRM looks up three values prints rows 5 8 0xb
+AAFV 0x060404e4 vdp2_InitScrollPlanes_2 CONFIRM sets four scroll plane params and offsets
+AAFV 0x06040728 scene_InitCommon CONFIRM common scene init with resolution and plane setup
+AAFV 0x06042660 list_CompactSlots4 CONFIRM compacts 4-slot list with 0x10 empty marker
+AAFV 0x060426e8 menu_DrawTwoPlayerIcons CONFIRM draws selected icon per side
+AAFV 0x0604291c menu_InitTeamSelect CONFIRM loads team data bin counts members sets mode
+AAFV 0x060430b0 gfx_LoadPairAndFree78 CONFIRM loads two size-2 resources frees slots 7 and 8
+AAFV 0x06043104 menu_DrawPlayerMarkers CONFIRM two per-side marker strings and icon
+AAFV 0x060431fc menu_ClearPlayerMarkers CONFIRM clears markers at both side positions
+AAFV 0x06043306 menu_InitCharSelectScene RENAME menu_InitRankingScene loads rank data bin, entered before ranking-style screen
+AAFV 0x060433cc menu_UpdateCountdownScreen RENAME menu_UpdateRankingScreen same header layout as ranking table, timeout after 0x78 frames
+AAFV 0x06043950 gfx_LoadResourceTrio CONFIRM frees then loads three resources
+AAFV 0x060439a8 ui_DrawScoreNumber RENAME ui_DrawTimeValue same cap 99 and 59 fields as time display, minutes seconds hundredths
+AAFV 0x06043ba8 ui_DrawLabelString CONFIRM cursor then pointer-table string with palette
+AAFV 0x06043c04 ui_ClearFiveFields CONFIRM prints zero at five header positions
+AAFV 0x06043c98 ui_DrawBlankRowString CONFIRM prints blank string on row
+AAFV 0x06043cf4 menu_DrawEightEntryGrid CONFIRM eight entries two columns of four with time and name
+AAFV 0x06043e5c color_SetRgbaAndApply UNSURE stores four bytes calls task callbacks, colour not shown
+AAFV 0x06043e94 color_StoreByteSelect UNSURE copies byte pair to destinations by flag
+AAFV 0x06043ec8 color_SetAlphaAndApply UNSURE byte at offset 3, alpha unproven
+AAFV 0x06043f60 flag_SetFromCompare CONFIRM flag equals compare result then calls helpers
+AAFV 0x06044060 vdp2_ResetWindowParams UNSURE vdp2 plane and offset resets, window unproven
+AAFV 0x060441b4 scene_LoadStageMenuPair RENAME scene_LoadPortraitPair loads table-selected portraits, stage link unproven
+AAFV 0x060443a8 scene_DrawStageBlankPair UNSURE draws same offset resource twice, purpose unclear
+AAFV 0x060444c8 scene_InitSpecialMode8 CONFIRM when mode is 8 loads bin and DMA copies
+AAFV 0x0604457c counter_TickAndAdvance CONFIRM byte counter, odd tick advances second wrapping at 6
+AAFV 0x06044604 scene_InitFadeState CONFIRM sets shadow reg flags, clears state vars, mode 0x27
+AAFV 0x06044734 menu_UpdateListSelection CONFIRM pad up/down steps index 0-0x65 skipping empty, mode 0x26
+AAFV 0x0604486c scene_InitLargeBuffer CONFIRM 32KB stack buffer, decode init, DMA, mode 0x32
+AAFV 0x06044958 cdc_GetStatus CONFIRM command 0 status read, packs 12 bytes
+AAFV 0x060449a0 cdc_GetStatusWrap CONFIRM tail-call to status helper
+AAFV 0x060449b4 cdc_CheckDiscStatus CONFIRM stable status read, -8 when invalid or bit 0x20 clear
+AAFV 0x06044a04 cdc_WaitStatusStable CONFIRM repeats until two CR reads match, irq masked
+AAFV 0x06044a7c cdc_GetHwInfo CONFIRM command 1 copies five result bytes
+AAFV 0x06044adc cdc_GetToc CONFIRM command 2 then reads data words
+AAFV 0x06044b24 cdc_GetSessionInfo CONFIRM command 3 with session byte returns word
+AAFV 0x06044b58 cdc_InitSystem CONFIRM command 4 with optional reset and wait sequence
+AAFV 0x06044bd8 cdc_OpenTray CONFIRM command 5 send, tray open is hardware semantics unproven but fits
+AAFV 0x06044bfc cdc_WaitHirqAndCheck CONFIRM polls HIRQ, -4 on bit 0x80, ends transfer on error
+AAFV 0x06044c5c cdc_EndDataTransfer CONFIRM command 6 returns masked count
+AAFV 0x06044cac cdc_ReturnConstant CONFIRM returns constant
+AAFV 0x06044cb8 cdc_ReadHirqRegister CONFIRM returns 16-bit HIRQ register
+AAFV 0x06044cc4 cdc_ClearHirqAndCall CONFIRM ors mask into HIRQ then writes mask or 1
+AAFV 0x06044cf0 cdc_WriteHirqMask CONFIRM stores 16-bit to HIRQ mask reg
+AAFV 0x06044cfc cdc_SetDefaultHirqMask CONFIRM writes constant mask and saves copy
+AAFV 0x06044d1c cdc_SetHirqBits CONFIRM ors bits into register
+AAFV 0x06044d50 cdc_ReadDataWords CONFIRM copies words from data reg, -7 on count mismatch
+AAFV 0x06044da4 cdc_CallWithIrqMasked CONFIRM raises irq mask around ExecCommand
+AAFV 0x06044df0 cdc_ExecCommand CONFIRM waits HIRQ, writes CR, reads response, -5 -6 errors
+AAFV 0x06044ea8 cdc_PollHirq CONFIRM polls HIRQ bits, timeout -3
+AAFV 0x06044ed4 cdc_WriteCommandRegs CONFIRM four words to CR1-CR4
+AAFV 0x06044f08 cdc_ReadResponseRegs CONFIRM four words from CR regs
+AAFV 0x06044f3c cdc_PlayDisc CONFIRM builds command 0x10 packet from range struct
+AAFV 0x06044f88 cdc_DispatchByType RENAME cdc_EncodePosition kind 0-3 table converts position struct to 3 packet bytes, else zero
+AAFV 0x06045000 cdc_SeekDisc CONFIRM cdc_SeekDisc command 0x11 packet, callers pass kind-only struct
+AAFV 0x06045030 cdc_ScanDisc CONFIRM cdc_ScanDisc command 0x12 packet with one byte param
+AAFV 0x06045058 cdc_SetFilterRange RENAME gfs_LoadRootIntoTable sets dir table from param, loads entry 0 into it, re-sets; callers use to restore dir
+AAFV 0x060450ac cdc_CopyStatusToGlobal RENAME gfs_EnterRootDir used for leading slash in path; copies 3 ids to current dir global
+AAFV 0x060450e0 str_ToUpper CONFIRM str_ToUpper a-z to uppercase copy
+AAFV 0x06045112 gfs_NormalizeName RENAME gfs_FindEntryByName uppercases name then looks up entry id; used per path component
+AAFV 0x06045134 str_FindLastOfTwoChars CONFIRM str_FindLastOfTwoChars backward scan for slash or backslash
+AAFV 0x06045174 gfs_FindOpenFileById CONFIRM gfs_FindOpenFileById 24-entry table lookup by id
+AAFV 0x060451f4 gfs_StartDirRead RENAME gfs_InitFileSystem called once at init: inits library with 24 slots, loads root dir, clears tables
+AAFV 0x0604529c gfs_ChangeDirPath CONFIRM gfs_ChangeDirPath splits path components and restores dir on error
+AAFV 0x060453a8 gfs_OpenFileByPath CONFIRM gfs_OpenFileByPath dir split, name lookup, opens; callers pass path string
+AAFV 0x06045650 gfs_SetupSectionHandles CONFIRM gfs_SetupSectionHandles per-node params then seek or stream callback
+AAFV 0x060458ac gfs_CloseSectionsMatching CONFIRM gfs_CloseSectionsMatching closes nodes matching key or all
+AAFV 0x06045938 gfs_ClearAllSections CONFIRM gfs_ClearAllSections zeroes entry word per node then closes stream; called on finish
+AAFV 0x060459a0 gfs_CheckTrayOpen UNSURE gfs_CheckTrayOpen no callers; callback-register result zero gives error -50
+AAFV 0x060459c4 gfs_GetFileStatus CONFIRM gfs_GetFileStatus special ids plus poll; callers loop on it until load done
+AAFV 0x06045ae0 gfs_StartFileLoad RENAME gfs_InitLibrary validates slot count 1-24 and aligned work size, sets dir table; only caller is init
+AAFV 0x06045bb8 gfs_GetErrorOrDirEntry RENAME gfs_LoadDir with table loads dir entries for id; null table returns pending error
+AAFV 0x06045c58 gfs_SetDirectoryTable CONFIRM gfs_SetDirectoryTable installs 3-word table params; null clears
+AAFV 0x06045cb8 gfs_GetFileSizeInfo RENAME gfs_NameToId finds dir entry by name in table, returns index; caller is name lookup
+AAFV 0x06045d0c gfs_GetEntryPointer RENAME gfs_IdToName index validated, returns entry+0xc where 12-char name sits
+AAFV 0x06045d68 gfs_GetDirEntryInfo CONFIRM gfs_GetDirEntryInfo copies 3-word entry by index from long or short table
+AAFV 0x06045dd0 gfs_UpdateOpenFiles RENAME gfs_CloseAllOpenFiles loops in-use handle slots, closes each; no callers
+AAFV 0x06045e40 gfs_OpenFileById CONFIRM gfs_OpenFileById bounds check, alloc slot, open; callers LoadDir and ReadSectors
+AAFV 0x06045ee4 gfs_CloseFile CONFIRM gfs_CloseFile releases handle then resets stream
+AAFV 0x06045f14 gfs_SeekFile CONFIRM gfs_SeekFile origin 0/1/2 with range check
+AAFV 0x06045fb8 gfs_TellFile CONFIRM gfs_TellFile returns current position via handler
+AAFV 0x06045ffc gfs_IsEndOfFile CONFIRM gfs_IsEndOfFile size <= tell position
+AAFV 0x06046048 gfs_GetFileSizeSectors CONFIRM gfs_GetFileSizeSectors ceil divide of size by param; no callers
+AAFV 0x0604609c gfs_GetFileInfoClearOnFlags RENAME gfs_GetFileInfo generic file info getter (size out); flag quirk is detail
+AAFV 0x060460fc gfs_GetFileSizeAndFlags CONFIRM gfs_GetFileSizeAndFlags outputs byte size and masked flags; callers read flag 0x40
+AAFV 0x0604619c gfs_ReadSectors CONFIRM gfs_ReadSectors open, seek, clamp count, blocking read, close
+AAFV 0x0604625c gfs_WaitReadDone RENAME gfs_ReadAndWait starts transfer then polls until done and returns count
+AAFV 0x060462e4 gfs_PollReadUntilDone CONFIRM gfs_PollReadUntilDone loops finish poll with retry limit, -0x16 timeout
+AAFV 0x06046368 gfs_StartTransfer CONFIRM gfs_StartTransfer clamps count, sets align and fields, adds to open list
+AAFV 0x06046480 gfs_StartRawTransfer CONFIRM gfs_StartRawTransfer idle check, state 2, queue; used by WaitForSectors
+AAFV 0x060464f4 gfs_IsTransferActive RENAME gfs_IsTransferDone returns 1 when pending flag is zero, inverse of name
+AAFV 0x0604651c gfs_ResetTransfer CONFIRM gfs_ResetTransfer clears state, removes from list, releases handle
+AAFV 0x06046568 gfs_GetTransferState CONFIRM gfs_GetTransferState outputs state and pending count
+AAFV 0x060465e4 gfs_CheckTransferDone CONFIRM gfs_CheckTransferDone cd type sets done flag on status 2
+AAFV 0x0604660c gfs_PollTransferFinish CONFIRM gfs_PollTransferFinish steps state, removes from list when finished
+AAFV 0x060466b8 gfs_FindNextReadyHandle RENAME gfs_PollAllTransfers pumps every active handle in list, outputs first or 0; no callers
+AAFV 0x06046730 gfs_SetCallbackA UNSURE gfs_SetCallbackA field 0x58 swapped; caller passes 1 so not clearly a callback
+AAFV 0x06046790 gfs_SetRetryCountA UNSURE gfs_SetRetryCountA setter on embedded struct, purpose unclear
+AAFV 0x060467f8 gfs_SetCallbackB UNSURE gfs_SetCallbackB swaps field 0x68 and returns old; saved and restored around poll, not clearly a callback
+AAFV 0x06046858 gfs_SetRetryCountB UNSURE gfs_SetRetryCountB forwards to stream setter at +0x6c, meaning unclear
+AAFV 0x060468c0 gfs_InitTransferSlot CONFIRM gfs_InitTransferSlot sets stream fields, mode 4, starts transfer
+AAFV 0x0604691c gfs_GetBufferPointer CONFIRM gfs_GetBufferPointer returns buffer word pair from +0x78
+AAFV 0x06046960 gfs_RegisterBuffer CONFIRM gfs_RegisterBuffer seeks to tell position, stores handle in global slot
+AAFV 0x060469e4 gfs_GetCurrentDirIds CONFIRM gfs_GetCurrentDirIds copies 3 words from global
+AAFV 0x06046a28 gfs_ChangeStateRequest RENAME gfs_InitCdDevice resets dir table, loads root dir or opens session; called by library init
+AAFV 0x06046b60 gfs_InitManagerState CONFIRM gfs_InitManagerState stores count, zeroes manager fields and slots
+AAFV 0x06046ca2 gfs_ReleaseHandle CONFIRM gfs_ReleaseHandle clears active slot, calls per-type close fn
+AAFV 0x06046e18 gfs_OpenFileHandle CONFIRM gfs_OpenFileHandle inits handle by dir flags, zeroes +4 +8
+AAFV 0x06046ea2 cd_ReadTocOrHeader RENAME cd_ReadVolumeDescriptor reads one sector, memcmp 6-byte signature, -3 on mismatch
+AAFV 0x06046f94 cd_ReadDirectoryInfo RENAME cd_ReadRootDirRecord copies root record location and size from descriptor
+AAFV 0x06047094 cd_OpenAndReadSession RENAME cd_OpenRootDir gets root record, opens handle, dispatches, closes
+AAFV 0x06047114 gfs_StepStreamState CONFIRM gfs_StepStreamState per-type step fn, tracks active handle, dispatches event
+AAFV 0x060471c0 gfs_PollTransferStatus CONFIRM gfs_PollTransferStatus pumps stream, updates active handle on state 6 or 1
+AAFV 0x06047280 gfs_GetFileOffset CONFIRM gfs_GetFileOffset record index to offset using size plus gap
+AAFV 0x06047366 gfs_ResetStreamHandle CONFIRM gfs_ResetStreamHandle removes from list, type-dependent device cleanup
+AAFV 0x060473b6 gfs_IsStreamFinished CONFIRM gfs_IsStreamFinished state 4 and nothing pending or flag set
+AAFV 0x0604747c gfs_StubForward CONFIRM gfs_StubForward thin wrapper over one call
+AAFV 0x06047490 gfs_CallWithLocalBuf CONFIRM gfs_CallWithLocalBuf submits command with throwaway result buffer
+AAFV 0x060474a8 scu_SetMaskedRegWrite RENAME cdc_SubmitCommand masks irq, writes command or packs 12-byte result; used by all cdc senders
+AAFV 0x0604750c scu_ReadThreeRegsAtomic CONFIRM scu_ReadThreeRegsAtomic copies 3 hw words with irq masked
+AAFV 0x060475c0 gfs_SetStreamCallback CONFIRM gfs_SetStreamCallback stores callback and arg, programs mode 3 or 4
+AAFV 0x0604766c gfs_GetPendingBufferInfo CONFIRM gfs_GetPendingBufferInfo returns buffer word pair via node
+AAFV 0x060476d0 gfs_ComputeReadSectors UNSURE gfs_ComputeReadSectors modular arithmetic on offsets, exact meaning unclear
+AAFV 0x060477e0 gfs_RefreshTransferState CONFIRM gfs_RefreshTransferState rereads stream fields and reapplies them
+AAFV 0x06047834 gfs_GetHandleStatus CONFIRM gfs_GetHandleStatus validated wrapper over refresh
+AAFV 0x06047878 gfs_GetReadSectorCount CONFIRM gfs_GetReadSectorCount field of stream struct shifted by one, -1 on null
+AAFV 0x060478dc gfs_GetHandleFlag RENAME gfs_IsHandleIdle validated wrapper returning idle test of inner node
+AAFV 0x06047c18 gfs_PollUntilEvent CONFIRM gfs_PollUntilEvent loops service main until constant result
+AAFV 0x06047c5e gfs_GetHandleValue2 RENAME gfs_IsBufferAttached validated wrapper over has-buffer-attached test
+AAFV 0x06047d80 gfs_SetCurrentNode CONFIRM gfs_SetCurrentNode picks current node first free, none or given
+AAFV 0x06047e20 gfs_ValidatedSetCall RENAME gfs_SetCurrentNodeChecked null and negative checks then SetCurrentNode
+AAFV 0x06047ee0 gfs_UpdateNodesPastLimit CONFIRM gfs_UpdateNodesPastLimit marks nodes ending below limit done, fixes pointers
+AAFV 0x06047ff4 gfs_StreamPositionUpdate CONFIRM gfs_StreamPositionUpdate updates read position and next sector output
+AAFV 0x060481dc gfs_SeekToPosition CONFIRM gfs_SeekToPosition sets read position or enables play range
+AAFV 0x06048244 gfs_ServiceStreamStep CONFIRM gfs_ServiceStreamStep runs position update then seek, reports error
+AAFV 0x06048318 gfs_GetNodeBufferResult UNSURE gfs_GetNodeBufferResult queries a count via cd command or vtable; meaning unclear
+AAFV 0x06048378 gfs_GetHandleValue3 UNSURE gfs_GetHandleValue3 null-checked wrapper over node buffer query
+AAFV 0x060483bc gfs_ClassifyNodeState CONFIRM gfs_ClassifyNodeState returns state code from flags and positions
+AAFV 0x06048508 gfs_SelectNextNode CONFIRM gfs_SelectNextNode scans node ring, picks node, returns result code
+AAFV 0x06048768 gfs_RunStreamSelectLoop CONFIRM gfs_RunStreamSelectLoop repeats select until done, updates retry count
+AAFV 0x0604881c gfs_ServiceMain CONFIRM gfs_ServiceMain reentrancy guard, steps current stream, returns state
+AAFV 0x06048954 gfs_SeekNodeRelative CONFIRM gfs_SeekNodeRelative sets position to range start plus offset
+AAFV 0x06048a50 gfs_IsNodeReadable CONFIRM gfs_IsNodeReadable classifies node state and compares to ready codes
+AAFV 0x06048efc gfs_CreateNode CONFIRM gfs_CreateNode inits node fields, queues cd command, inserts sorted
+AAFV 0x0604906e gfs_UnlinkPendingNode CONFIRM gfs_UnlinkPendingNode removes node from pending chain, updates selector
+AAFV 0x060491d4 gfs_StartRequest RENAME gfs_CreateStream wrapper over stream node alloc, zero on fail; used by open-by-path
+AAFV 0x060491fc gfs_CloseNode CONFIRM gfs_CloseNode unlinks node, flushes stream, fixes current/max-end pointers
+AAFV 0x060493fc gfs_CloseStream CONFIRM gfs_CloseStream closes all nodes, ends cmd session, clears slot
+AAFV 0x0604950c gfs_OpenNodeRequest CONFIRM gfs_OpenNodeRequest allocs node and slot, opens handle, creates node
+AAFV 0x06049630 gfs_OpenWithDirEntry CONFIRM gfs_OpenWithDirEntry gets dir entry info, repacks, forwards to open request
+AAFV 0x060496ac gfs_OpenFileMode CONFIRM gfs_OpenFileMode maps mode 0/1 to flags, forwards to dir-entry open
+AAFV 0x0604971c gfs_OpenRangeMode CONFIRM gfs_OpenRangeMode validates sector range, maps mode, forwards open request
+AAFV 0x06049824 gfs_ValidatedNodeCall UNSURE gfs_ValidatedNodeCall null -11, negative -14, forwards node and value to unclear setter
+AAFV 0x06049878 gfs_OpenNodeWithSize CONFIRM gfs_OpenNodeWithSize validated open with mode 6 then sets value on node
+AAFV 0x060498f4 gfs_ValidatedFlushHandle RENAME gfs_CloseNodeChecked null -11 then calls CloseNode on handle node
+AAFV 0x06049b74 gfs_GetFilterInfo CONFIRM gfs_GetFilterInfo reads range and filter fields, unset flags give 0xffff
+AAFV 0x0604a6c8 cdc_ExecCommandWithRetry CONFIRM cdc_ExecCommandWithRetry runs cd command, polls result, reinit on failure
